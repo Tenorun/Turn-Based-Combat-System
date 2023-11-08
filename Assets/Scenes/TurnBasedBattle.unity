@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &248878591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -464,6 +464,9 @@ MonoBehaviour:
   - {r: 0.5019608, g: 0.48235294, b: 0.2509804, a: 1}
   - {r: 0.2509804, g: 0.34901962, b: 0.5019608, a: 1}
   disabledColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+  selectedBtnNum: 0
+  HorizontalInput: 0
+  VerticalInput: 0
 --- !u!1 &883316371
 GameObject:
   m_ObjectHideFlags: 0
