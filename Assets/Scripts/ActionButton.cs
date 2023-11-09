@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ActionButton : MonoBehaviour
 {
+    public GameObject BattleMaster;
+
     public Image[] actionButtons;
     public Color[] highlightedColors;
     public Color[] unselectedColors;
@@ -97,10 +99,15 @@ public class ActionButton : MonoBehaviour
         UpdateBtnHighlight();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         GetInput();
         MoveCursor();
         UpdateBtnHighlight();
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            BattleMaster.GetComponent<BattleMaster>().GetActionMenuInput(selectedBtnNum);
+        }
     }
 }
