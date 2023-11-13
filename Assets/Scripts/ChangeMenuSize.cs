@@ -4,32 +4,62 @@ using UnityEngine;
 
 public class ChangeMenuSize : MonoBehaviour
 {
+    
     private RectTransform uiRectTransform;
 
-    void ChangeSize(bool isExpand)
-    {
-        if(isExpand)
-        {
-            // 원하는 크기로 UI의 높이를 조절합니다.
-            float newHeight = 109f; // 원하는 높이 값으로 변경하세요.
-            uiRectTransform.sizeDelta = new Vector2(uiRectTransform.sizeDelta.x, newHeight);
+    const float _defaultTopValue_ = -152f;
+    const float _maxTopValue_ = -71f;
+    
+    private float topValue;
+    private float topValueVar = 0.1f;
 
-            // UI를 세로로 늘렸기 때문에 Top 값을 조절하여 가운데 정렬합니다.
-            float topOffset = (Screen.height - newHeight) / 2f;
-            uiRectTransform.anchoredPosition = new Vector2(uiRectTransform.anchoredPosition.x, -topOffset);
-        }
+    public bool changeSizeTrigger = false;
+
+    [SerializeField] private bool isExpanded = false;
+
+    void changeTopValue(float Top_)
+    {
+        uiRectTransform.offsetMax = new Vector2(-131, Top_);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        topValue = _defaultTopValue_;
         uiRectTransform = GetComponent<RectTransform>();
-        ChangeSize(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (changeSizeTrigger)
+        {
+            if (isExpanded)                 //줄이기
+            {
+                isExpanded = false;
+                changeSizeTrigger = false;
+                topValue = _defaultTopValue_;
+                changeTopValue(topValue);
+            }
+            else                            //늘리기
+            {
+                topValue = _defaultTopValue_ + (Mathf.Log(topValueVar, 2)*10-5);
+                if(topValue >= _maxTopValue_)
+                {
+                    isExpanded = true;
+                    changeSizeTrigger = false;
+                    topValue = _maxTopValue_;
+                    topValueVar = 0.1f;
+                }
+                else
+                {
+                    topValueVar += 1500f*Time.deltaTime;
+                }
+                if(topValue > _defaultTopValue_)
+                {
+                    changeTopValue(topValue);
+                }
+            }
+        }
     }
 }
