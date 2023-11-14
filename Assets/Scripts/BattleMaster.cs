@@ -11,8 +11,11 @@ public class BattleMaster : MonoBehaviour
 
     AllyCharacter[] Character = new AllyCharacter[2];
 
+
     public class AllyCharacter
     {
+        GameObject MenuFrame = GameObject.Find("Menu Frame");
+        
         string name;
 
         int maxHP;
@@ -38,21 +41,30 @@ public class BattleMaster : MonoBehaviour
             this.luck = luck;
         }
 
+
+        //액션 버튼 조작
         public void Attack()
         {
             Debug.Log("공격");
         }
         public void OpenSkillMenu()
         {
+            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
             Debug.Log("스킬");
         }
         public void OpenItemMenu()
         {
+            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
             Debug.Log("아이템");
         }
         public void RunAway()
         {
             Debug.Log("도망");
+        }
+        public void Cancel()
+        {
+            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
+            Debug.Log("취소");
         }
     }
 
@@ -82,12 +94,16 @@ public class BattleMaster : MonoBehaviour
             case 3:
                 Character[charSelecting].RunAway();
                 break;
+            case 4:         //취소
+                Character[charSelecting].Cancel();
+                break;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+
         Character[0] = new AllyCharacter();
         Character[1] = new AllyCharacter();
 

@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &248878591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -523,6 +523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BattleMaster: {fileID: 704444433}
+  isActBtnLocked: 0
+  isActLocked: 0
   actionButtons:
   - {fileID: 1834191128}
   - {fileID: 883316374}
@@ -554,7 +556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07371c60aadbccd45bb25e0e531ac4c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeSizeTrigger: 0
   isExpanded: 0
 --- !u!1 &704444433
 GameObject:
