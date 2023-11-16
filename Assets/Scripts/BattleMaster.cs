@@ -45,26 +45,61 @@ public class BattleMaster : MonoBehaviour
         //액션 버튼 조작
         public void Attack()
         {
-            Debug.Log("공격");
+            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
+            {
+                Debug.Log("공격");
+            }
+            else
+            {
+                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+            }
         }
         public void OpenSkillMenu()
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
-            Debug.Log("스킬");
+            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
+            {
+                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
+                Debug.Log("스킬");
+            }
+            else
+            {
+                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+            }
         }
         public void OpenItemMenu()
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
-            Debug.Log("아이템");
+            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
+            {
+                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
+                Debug.Log("아이템");
+            }
+            else
+            {
+                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+            }
         }
         public void RunAway()
         {
-            Debug.Log("도망");
+            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
+            {
+                Debug.Log("도망");
+            }
+            else
+            {
+                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+            }
         }
         public void Cancel()
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
-            Debug.Log("취소");
+            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
+            {
+                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
+                Debug.Log("취소");
+            }
+            else
+            {
+                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = true;
+            }
         }
     }
 

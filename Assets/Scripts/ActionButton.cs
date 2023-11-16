@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class ActionButton : MonoBehaviour
 
     public Color disabledColor;                             //비활성화된 버튼 색상
 
-    [SerializeField] private int selectedBtnNum = 0;        //선택된 버튼의 번호(자세한건 아래를 참조)
+    public int selectedBtnNum = 0;                          //선택된 버튼의 번호(자세한건 아래를 참조)
     [SerializeField] private float HorizontalInput;         //가로 입력
     [SerializeField] private float VerticalInput;           //세로 입력
     //0: 공격 버튼
@@ -30,7 +31,7 @@ public class ActionButton : MonoBehaviour
     */
 
     private void GetDirectionalInput()                      //방향 입력 받기
-    {
+    {   
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         VerticalInput = Input.GetAxisRaw("Vertical");
     }
@@ -99,6 +100,11 @@ public class ActionButton : MonoBehaviour
 
     void Start()
     {
+        isActBtnLocked = false;
+        isActLocked = false;
+
+        selectedBtnNum = 0;
+
         UpdateBtnHighlight();
     }
 
