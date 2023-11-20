@@ -76,6 +76,7 @@ public class BattleMaster : MonoBehaviour
             else
             {
                 MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+                MenuFrame.GetComponent<ItemMenu>().DisplayItemMenu(false);
             }
         }
         public void RunAway()
@@ -94,6 +95,7 @@ public class BattleMaster : MonoBehaviour
             if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
             {
                 MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
+                MenuFrame.GetComponent<ItemMenu>().DisplayItemMenu(false);
                 Debug.Log("√Îº“");
             }
             else
