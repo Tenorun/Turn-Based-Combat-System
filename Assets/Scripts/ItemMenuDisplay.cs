@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemMenu : MonoBehaviour
+public class ItemMenuDisplay : MonoBehaviour
 {
     GameObject ItemMenuFrame;
 
@@ -19,7 +19,6 @@ public class ItemMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //아이템 창이 선택되어있는 상태로 화면이 확대가 되어있으면 표시
         if (this.GetComponent<ChangeMenuSize>().isExpanded
             && !this.GetComponent<ChangeMenuSize>().changeSizeTrigger

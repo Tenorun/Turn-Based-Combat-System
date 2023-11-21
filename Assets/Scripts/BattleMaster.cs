@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class BattleMaster : MonoBehaviour
@@ -26,6 +23,8 @@ public class BattleMaster : MonoBehaviour
         int defence;
         int speed;
         int luck;
+
+        int[] items = new int[8];
 
         public void GetCharacterStatus(string name, int maxHP, int currentHP, int maxSP, int currentSP, int offence, int defence, int speed, int luck)
         {
@@ -76,7 +75,7 @@ public class BattleMaster : MonoBehaviour
             else
             {
                 MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-                MenuFrame.GetComponent<ItemMenu>().DisplayItemMenu(false);
+                MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
             }
         }
         public void RunAway()
@@ -95,7 +94,7 @@ public class BattleMaster : MonoBehaviour
             if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
             {
                 MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
-                MenuFrame.GetComponent<ItemMenu>().DisplayItemMenu(false);
+                MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
                 Debug.Log("√Îº“");
             }
             else
