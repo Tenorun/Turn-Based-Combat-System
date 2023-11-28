@@ -24,7 +24,7 @@ public class BattleMaster : MonoBehaviour
         int speed;
         int luck;
 
-        int[] items = new int[8];
+        public int[] items = new int[25];
 
         public void GetCharacterStatus(string name, int maxHP, int currentHP, int maxSP, int currentSP, int offence, int defence, int speed, int luck)
         {
@@ -133,6 +133,21 @@ public class BattleMaster : MonoBehaviour
             case 4:         //취소
                 Character[charSelecting].Cancel();
                 break;
+        }
+    }
+
+    //페이지 크기 받기
+    public int GetPageSize()
+    {
+        int itemAmount = Character[charSelecting].items.Length;
+
+        if (itemAmount % 5 == 0)
+        {
+            return itemAmount / 5;
+        }
+        else
+        {
+            return itemAmount / 5 + 1;
         }
     }
 

@@ -3,15 +3,14 @@ using UnityEngine.UI;
 
 public class ItemMenuPointer : MonoBehaviour
 {
-    public float InputDelayTime = 0f;
-
     public Image[] ItemPointerArrows;
 
     public int itemPointerNum = 0;
 
+    private float InputDelayTime = 0f;
     private float VerticalInput;
     private float prevVerticalInput;
-    public bool onceReleased = true;
+    private bool onceReleased = true;
 
     private void GetDirectionalInput()
     {
