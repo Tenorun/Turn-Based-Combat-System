@@ -721,7 +721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2329d8e57a946404bb8f4c7fdd2721af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91115b46643693540a7aef61b2b539b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1089,10 +1089,10 @@ RectTransform:
   - {fileID: 1285908962}
   m_Father: {fileID: 1077314164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 77}
-  m_SizeDelta: {x: 288, y: -168}
+  m_AnchoredPosition: {x: 0, y: -31}
+  m_SizeDelta: {x: 360, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &529657700
 MonoBehaviour:
@@ -1246,8 +1246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -72.49995}
-  m_SizeDelta: {x: -184, y: -159.0001}
+  m_AnchoredPosition: {x: 0, y: -99.5}
+  m_SizeDelta: {x: -280, y: -213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622487743
 MonoBehaviour:
@@ -1930,7 +1930,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 384, y: 216}
+  m_ReferenceResolution: {x: 480, y: 270}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2320,7 +2320,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 272, y: 33}
+  m_SizeDelta: {x: 344, y: 33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285908963
 MonoBehaviour:
@@ -3941,8 +3941,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2038756592}
+  - component: {fileID: 2038756593}
   m_Layer: 0
-  m_Name: Item dex
+  m_Name: Item Master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3963,6 +3964,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2038756593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038756590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851fd16ceaf779f4389e7dfc80445184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2041416312
 GameObject:
   m_ObjectHideFlags: 0

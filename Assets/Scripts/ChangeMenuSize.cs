@@ -4,8 +4,8 @@ public class ChangeMenuSize : MonoBehaviour
 {
     private RectTransform uiRectTransform;
 
-    const float _minTopValue_ = -152f;                  //창의 최소 길이
-    const float _maxTopValue_ = -56f;                   //창의 최대 길이
+    const float _minTopValue_ = -206f;                  //창의 최소 길이
+    const float _maxTopValue_ = -110f;                   //창의 최대 길이
     const float _movingSpeed_ = 100f;                   //창 확대 축소 속도
     
     private float topValue;                             //창의 길이
@@ -41,7 +41,7 @@ public class ChangeMenuSize : MonoBehaviour
 
     private void changeTopValue(float Top_)               //창 크기 변경
     {
-        uiRectTransform.offsetMax = new Vector2(-92, Top_);
+        uiRectTransform.offsetMax = new Vector2(-140, Top_);
     }
 
     void Start()
