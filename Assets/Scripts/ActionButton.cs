@@ -117,7 +117,7 @@ public class ActionButton : MonoBehaviour
                 if (Input.GetButtonDown("Submit"))          //확인 입력
                 {
                     isActBtnLocked = true;
-                    BattleMaster.GetComponent<BattleMaster>().GetActionMenuInput(selectedBtnNum);
+                    BattleMaster.GetComponent<BattleActions>().GetActionMenuInput(selectedBtnNum);
                 }
             }
             else                                            //버튼 조작이 잠겼을때
@@ -125,7 +125,7 @@ public class ActionButton : MonoBehaviour
                 if (Input.GetButtonDown("Cancel"))          //취소 입력
                 {
                     isActBtnLocked = false;
-                    BattleMaster.GetComponent<BattleMaster>().GetActionMenuInput(4);
+                    BattleMaster.GetComponent<BattleActions>().GetActionMenuInput(4);
                 }
             }
         }

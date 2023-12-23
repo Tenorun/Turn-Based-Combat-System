@@ -40,68 +40,6 @@ public class BattleMaster : MonoBehaviour
             this.luck = luck;
         }
 
-
-        //액션 버튼 조작
-        public void Attack()
-        {
-            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
-            {
-                Debug.Log("공격");
-            }
-            else
-            {
-                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            }
-        }
-        public void OpenSkillMenu()
-        {
-            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
-            {
-                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
-                Debug.Log("스킬");
-            }
-            else
-            {
-                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            }
-        }
-        public void OpenItemMenu()
-        {
-            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
-            {
-                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
-                Debug.Log("아이템");
-            }
-            else
-            {
-                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-                MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
-            }
-        }
-        public void RunAway()
-        {
-            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && !MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
-            {
-                Debug.Log("도망");
-            }
-            else
-            {
-                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            }
-        }
-        public void Cancel()
-        {
-            if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
-            {
-                MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
-                MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
-                Debug.Log("취소");
-            }
-            else
-            {
-                MenuFrame.GetComponent<ActionButton>().isActBtnLocked = true;
-            }
-        }
     }
 
     class Enemy
@@ -112,28 +50,6 @@ public class BattleMaster : MonoBehaviour
         int defence;
         int speed;
         int luck;
-    }
-
-    public void GetActionMenuInput(int _inputNum)
-    {
-        switch (_inputNum)
-        {
-            case 0:
-                Character[charSelecting].Attack();
-                break;
-            case 1:
-                Character[charSelecting].OpenSkillMenu();
-                break;
-            case 2:
-                Character[charSelecting].OpenItemMenu();
-                break;
-            case 3:
-                Character[charSelecting].RunAway();
-                break;
-            case 4:         //취소
-                Character[charSelecting].Cancel();
-                break;
-        }
     }
 
     //페이지 크기 받기
