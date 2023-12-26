@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
-    public int languageVal = 0;
+    public int languageVal = 0;         //디버그용
     Item item;
     // 아이템 데이터베이스 클래스
     public class ItemDatabase
