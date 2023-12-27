@@ -228,7 +228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\"\uB538\uAE30\uB450\uBD80\""
+  m_text: '"White powder of Joy"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96055dc6c9a1b1246a526f8828fdd8a8, type: 2}
   m_sharedMaterial: {fileID: 6308091994926306916, guid: 96055dc6c9a1b1246a526f8828fdd8a8, type: 2}
@@ -1393,6 +1393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c20c6c38a3e27742ac0ecf59b92af56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charSelecting: 0
 --- !u!114 &704444436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,8 +1558,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "(HP\uB97C 30\uD68C\uBCF5)\n\uB538\uAE30\uB9DB\uC774 \uB098\uB294 \uB450\uBD80\uB2E4.\n\uC774
-    \uB3C4\uB370\uCCB4 \uBB34\uC2A8 \uAD34\uB784\uD55C \uC694\uB9AC\uC774\uB780 \uB9D0\uC778\uAC00..."
+  m_text: "\uC544\uB9C8 \uC774\uAC78 \uAC8C\uC784 \uD654\uBA74\uC5D0\uC11C \uBD24\uB2E4\uB294\uAC74
+    \uB10C \uB0B4 \uCF54\uB4DC\uB97C \uAC74\uB4DC\uB838\uB2E4\uB294 \uAC70\uC57C."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}
   m_sharedMaterial: {fileID: -5713389171298051372, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}

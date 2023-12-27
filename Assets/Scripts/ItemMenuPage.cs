@@ -36,7 +36,11 @@ public class ItemMenuPage : MonoBehaviour
 
     private void UpdateNum()
     {
-        maxPage = BattleMaster.GetComponent<BattleMaster>().GetPageSize();
+        //maxPage = BattleMaster.GetComponent<BattleMaster>().GetPageSize();
+        maxPage = 5;
+        //testcode
+        
+
         if(horizontalInput < -0.3f && currentPage != 1)
         {
             --currentPage;

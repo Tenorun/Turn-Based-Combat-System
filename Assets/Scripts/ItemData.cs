@@ -50,6 +50,7 @@ public class ItemData : MonoBehaviour
 
         // 사용 대상 값
         /*사용 대상 번호
+            -1: 사용 불가
             0: 전체중 1명
             1: 아군중 1명
             2: 적중 1명
@@ -78,6 +79,8 @@ public class ItemData : MonoBehaviour
         //아이템 데이터 베이스에 추가
         //ItemDatabase.AddItem(new Item((아이템 고유번호), new string[] { "(아이템 한국어 이름)", "(아이템 영어 이름)"}, new string[] { "(한국어 설명문)", "(영어 설명문)" }, new string[] { "(한국어 사용 특수 대사)", "(영어 사용 특수 대사)" }, (0~6 사용대상 값)));
         //ItemDatabase.AddItem(new Item(, new string[] { "", "" }, new string[] { "", "" }, new string[] { "", "" }, ));
+        ItemDatabase.AddItem(new Item(0, new string[] { "None", "None" }, new string[] { "아마 이걸 게임 화면에서 봤다는건 넌 내 코드를 건드렸다는 거야.", "If you seeing this in gamescreen, you edited my code." }, new string[] { "", "" }, -1));
+
         ItemDatabase.AddItem(new Item(1, new string[] { "햄버거", "Hamburger" }, new string[] { "(HP를 100회복)\n100% 유기농 순쇠패티", "(Restores 100 HP)\n100% Organic beef patty" }, new string[] { "", "" }, 1));
         ItemDatabase.AddItem(new Item(2, new string[] { "딸기두부", "Strawberry Tofu" }, new string[] { "(HP를 50회복)\n이 도데체 무슨 해괴한 음식이란 말인가...", "Restores 50 HP\n WHAT THE HELL IS THIS KIND OF FOOD" }, new string[] { "", "" }, 1));
         ItemDatabase.AddItem(new Item(3, new string[] { "팔랑거리는 종이", "Floppy paper" }, new string[] { "종이다.\n팔랑거린다.", "It's paper.\nfloppy" }, new string[] { "", "" }, 3));

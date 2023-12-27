@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerCharacterData : MonoBehaviour
 {
+    PlayerCharacter character;
+
     // 플레이어 캐릭터 데이터베이스 클래스
     public class PlayerCharacterDatabase
     {
@@ -38,7 +40,7 @@ public class PlayerCharacterData : MonoBehaviour
         public int CharacterId { get; set; }
 
         // 캐릭터 이름
-        public string[] name { get; set; }
+        public string[] CharacterName { get; set; }
 
         // 최대 HP
         public int MaxHp { get; set; }
@@ -92,10 +94,10 @@ public class PlayerCharacterData : MonoBehaviour
         public int[] GrowthPotential { get; set; }
 
         // 생성자
-        public PlayerCharacter(int CharacterId, string[] name, int maxHp, int maxSp, int attack, int defense, int specialAttack, int specialDefense, int speed, int luck, int weapon, int armor, int accessory, int level, int experience, int[] growthPotential)
+        public PlayerCharacter(int characterId, string[] characterName, int maxHp, int maxSp, int attack, int defense, int specialAttack, int specialDefense, int speed, int luck, int weapon, int armor, int accessory, int level, int experience, int[] growthPotential)
         {
-            this.CharacterId = CharacterId;
-            this.name = name;
+            this.CharacterId = characterId;
+            this.CharacterName = characterName;
             this.MaxHp = maxHp;
             this.CurrentHp = maxHp;
             this.MaxSp = maxSp;
@@ -119,7 +121,7 @@ public class PlayerCharacterData : MonoBehaviour
     void Start()
     {
         PlayerCharacterDatabase.AddPlayer(new PlayerCharacter(
-            1,
+            1,      //캐릭터 ID
             new string[] {"벤드 화이트홀", "Bend Whitehall"},
             40,     //최대 HP
             25,     //최대 SP
@@ -136,6 +138,20 @@ public class PlayerCharacterData : MonoBehaviour
             0,       //경혐치
             new int[] { 7, 7, 3, 5, 6, 6, 4, 4 }    //성장 적성
             ));
-    }
 
+        //아래의 코드와 같이 GetPlayer(n)에 캐릭터 ID를 넣으면 됨
+        //character = PlayerCharacterDatabase.GetPlayer(1);
+        //Debug.Log(character.characterName[0]);
+        //위 경우 아이디가 1인 캐릭터의 한국어 이름을 출력한다.
+        
+
+        //테스트 인벤토리
+        character = PlayerCharacterDatabase.GetPlayer(1);
+        character.Inventory = new int[] 
+        {1,2,3,4,5,
+         2,3,4,4,5,
+         3,3,4,2,1,
+         4,1,1,0,0,
+         0,0,0,0,0};
+    }
 }
