@@ -88,8 +88,8 @@ public class ItemData : MonoBehaviour
         ItemDatabase.AddItem(new Item(5, new string[] { "행복의 흰 가루", "White powder of Joy" }, new string[] { "흐헤헤...히히...헤헤...오호호...", "Hee...Hee...hehe..." }, new string[] { "", "" }, 1));
 
         //Item item;
-        item = ItemDatabase.GetItem(2);   //여기에 찾으려는 아이템의 고유번호를 넣는다.
-        Debug.Log(item.ItemName[0]);  //"딸기두부"   ItemName의 배열 번호는 언어 값
+        //item = ItemDatabase.GetItem(2);   //여기에 찾으려는 아이템의 고유번호를 넣는다.
+        //Debug.Log(item.ItemName[0]);  //"딸기두부"   ItemName의 배열 번호는 언어 값
 
     }
 

@@ -22,13 +22,13 @@ public class ItemMenuPointer : MonoBehaviour
     {
         if(VerticalInput >= 0.3f)
         {
-            if (itemPointerNum > 0f) --itemPointerNum;
+            if (itemPointerNum > 0) --itemPointerNum;
             InputDelayTime = 0f;
             onceReleased = false;
         }
         else if(VerticalInput <= -0.3f)
         {
-            if (itemPointerNum < 4f) ++itemPointerNum;
+            if (itemPointerNum < 4) ++itemPointerNum;
             InputDelayTime = 0f;
             onceReleased = false;
         }

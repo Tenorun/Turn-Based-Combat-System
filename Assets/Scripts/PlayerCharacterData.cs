@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCharacterData : MonoBehaviour
 {
-    PlayerCharacter character;
+    public PlayerCharacter character;
 
     // 플레이어 캐릭터 데이터베이스 클래스
     public class PlayerCharacterDatabase
@@ -73,7 +73,7 @@ public class PlayerCharacterData : MonoBehaviour
         public int Luck { get; set; }
 
         // 인벤토리
-        public int[] Inventory { get; set; }
+        public List<int> Inventory { get; set; }
 
         // 무기
         public int Weapon { get; set; }
@@ -108,7 +108,7 @@ public class PlayerCharacterData : MonoBehaviour
             this.SpecialDefense = specialDefense;
             this.Speed = speed;
             this.Luck = luck;
-            this.Inventory = new int[25];
+            this.Inventory = new List<int>();
             this.Weapon = weapon;
             this.Armor = armor;
             this.Accessory = accessory;
@@ -116,6 +116,11 @@ public class PlayerCharacterData : MonoBehaviour
             this.Experience = experience;
             this.GrowthPotential = growthPotential;
         }
+    }
+
+    public void SetSearchCharacter(int characterID)
+    {
+        character = PlayerCharacterDatabase.GetPlayer(characterID);
     }
 
     void Start()
@@ -141,17 +146,26 @@ public class PlayerCharacterData : MonoBehaviour
 
         //아래의 코드와 같이 GetPlayer(n)에 캐릭터 ID를 넣으면 됨
         //character = PlayerCharacterDatabase.GetPlayer(1);
-        //Debug.Log(character.characterName[0]);
+        //Debug.Log(character.CharacterName[0]);
         //위 경우 아이디가 1인 캐릭터의 한국어 이름을 출력한다.
         
 
         //테스트 인벤토리
         character = PlayerCharacterDatabase.GetPlayer(1);
-        character.Inventory = new int[] 
-        {1,2,3,4,5,
-         2,3,4,4,5,
-         3,3,4,2,1,
-         4,1,1,0,0,
-         0,0,0,0,0};
+        Debug.Log(character.CharacterName[0]);
+
+        character.Inventory.Add(1);
+        character.Inventory.Add(2);
+        character.Inventory.Add(3);
+        character.Inventory.Add(5);
+        character.Inventory.Add(4);
+        character.Inventory.Add(2);
+        character.Inventory.Add(2);
+        character.Inventory.Add(1);
+        character.Inventory.Add(2);
+        character.Inventory.Add(3);
+        character.Inventory.Add(1);
+        character.Inventory.Add(1);
+        Debug.Log(character.Inventory[0]);
     }
 }

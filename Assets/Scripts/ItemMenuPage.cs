@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class ItemMenuPage : MonoBehaviour
 {
-    public GameObject BattleMaster;
-    public GameObject ItemPointerArea;
-
     // Start is called before the first frame update
     public Sprite[] PageDigit;
     public Sprite[] InventorySizeDigit;
@@ -36,9 +33,8 @@ public class ItemMenuPage : MonoBehaviour
 
     private void UpdateNum()
     {
-        //maxPage = BattleMaster.GetComponent<BattleMaster>().GetPageSize();
+        //test code
         maxPage = 5;
-        //testcode
         
 
         if(horizontalInput < -0.3f && currentPage != 1)
@@ -46,16 +42,12 @@ public class ItemMenuPage : MonoBehaviour
             --currentPage;
             inputDelayTime = 0f;
             onceReleased = false;
-
-            ItemPointerArea.GetComponent<ItemMenuPointer>().itemPointerNum = 0;
         }
         else if(horizontalInput > 0.3f && currentPage != maxPage)
         {
             ++currentPage;
             inputDelayTime = 0f;
             onceReleased = false;
-
-            ItemPointerArea.GetComponent<ItemMenuPointer>().itemPointerNum = 0;
         }
     }
 
