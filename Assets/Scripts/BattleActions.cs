@@ -53,7 +53,7 @@ public class BattleActions : MonoBehaviour
         else
         {
             MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
+            MenuFrame.GetComponent<ItemMenuWaker>().WakeItemMenu(false);
         }
     }
 
@@ -74,7 +74,7 @@ public class BattleActions : MonoBehaviour
         if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
         {
             MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
-            MenuFrame.GetComponent<ItemMenuDisplay>().DisplayItemMenu(false);
+            MenuFrame.GetComponent<ItemMenuWaker>().WakeItemMenu(false);
             Debug.Log("√Îº“");
         }
         else

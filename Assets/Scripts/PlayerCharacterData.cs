@@ -157,15 +157,15 @@ public class PlayerCharacterData : MonoBehaviour
         character.Inventory.Add(1);
         character.Inventory.Add(2);
         character.Inventory.Add(3);
-        character.Inventory.Add(5);
+        character.Inventory.Add(4);
+        character.Inventory.Add(5);//
         character.Inventory.Add(4);
         character.Inventory.Add(2);
         character.Inventory.Add(2);
         character.Inventory.Add(1);
+        character.Inventory.Add(5);//
         character.Inventory.Add(2);
-        character.Inventory.Add(3);
-        character.Inventory.Add(1);
-        character.Inventory.Add(1);
+        character.Inventory.Add(2);
         Debug.Log(character.Inventory[0]);
     }
 }

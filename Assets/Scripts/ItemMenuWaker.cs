@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemMenuDisplay : MonoBehaviour
+public class ItemMenuWaker : MonoBehaviour
 {
     GameObject ItemMenuFrame;
 
-    public void DisplayItemMenu(bool displayStatus)
+    public void WakeItemMenu(bool displayStatus)
     {
         ItemMenuFrame.SetActive(displayStatus);
     }
     void Start()
     {
         ItemMenuFrame = GameObject.Find("Item Menu");
-        DisplayItemMenu(false);
+        WakeItemMenu(false);
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class ItemMenuDisplay : MonoBehaviour
             && !this.GetComponent<ChangeMenuSize>().changeSizeTrigger
             && this.GetComponent<ActionButton>().selectedBtnNum == 2)
         {
-            DisplayItemMenu(true);
+            WakeItemMenu(true);
         }
     }
 }
