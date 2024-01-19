@@ -124,7 +124,6 @@ public class ActionButton : MonoBehaviour
             {
                 if (Input.GetButtonDown("Cancel"))          //취소 입력
                 {
-                    isActBtnLocked = false;
                     BattleMaster.GetComponent<BattleActions>().GetActionMenuInput(4);
                 }
             }

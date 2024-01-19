@@ -8,7 +8,7 @@ public class BattleActions : MonoBehaviour
 
     private bool CheckCompletelyExpended()
     {
-        if(!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger && MenuFrame.GetComponent<ChangeMenuSize>().isExpanded)
+        if(!MenuFrame.GetComponent<MenuWaker>().changeSizeTrigger && MenuFrame.GetComponent<MenuWaker>().isExpanded)
         {
             return true;
         }
@@ -34,12 +34,13 @@ public class BattleActions : MonoBehaviour
     {
         if (!CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
+            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(true, 1);
             Debug.Log("스킬");
         }
         else
         {
             MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
+            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 1);
         }
     }
 
@@ -47,13 +48,13 @@ public class BattleActions : MonoBehaviour
     {
         if (!CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(true);
+            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(true, 2);
             Debug.Log("아이템");
         }
         else
         {
             MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            MenuFrame.GetComponent<ItemMenuWaker>().WakeItemMenu(false);
+            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 2);
         }
     }
 
@@ -71,10 +72,9 @@ public class BattleActions : MonoBehaviour
 
     public void Cancel()
     {
-        if (!MenuFrame.GetComponent<ChangeMenuSize>().changeSizeTrigger)
+        if (CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<ChangeMenuSize>().changeSize(false);
-            MenuFrame.GetComponent<ItemMenuWaker>().WakeItemMenu(false);
+            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 4);
             Debug.Log("취소");
         }
         else
