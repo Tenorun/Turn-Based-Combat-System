@@ -107,6 +107,9 @@ public class MenuWaker : MonoBehaviour
     {
         topValue = _minTopValue_;
         uiRectTransform = GetComponent<RectTransform>();
+
+        uiRectTransform.offsetMax = new Vector2(-159, _minTopValue_);
+        SetWakeMenu(false, 4);
     }
 
     // Update is called once per frame
