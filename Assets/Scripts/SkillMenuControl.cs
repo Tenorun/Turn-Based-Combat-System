@@ -10,7 +10,7 @@ public class SkillMenuControl : MonoBehaviour
     public Image[] skillIconFrame;
     public Image[] skillIcon;
     public GameObject[] pointerSquare;
-    public TextMeshProUGUI[] skillBtnNames;
+    public TextMeshProUGUI[] skillBtnText;
 
     public int currentSelectNum = 0;
 
@@ -59,7 +59,7 @@ public class SkillMenuControl : MonoBehaviour
                 skillBtnBaseFrame[i].color = Color.black;
                 skillIconFrame[i].color = Color.white;
                 skillIcon[i].color = Color.white;
-                skillBtnNames[i].color = Color.white;
+                skillBtnText[i].color = Color.white;
                 pointerSquare[i].SetActive(true);
             }
             else
@@ -67,7 +67,7 @@ public class SkillMenuControl : MonoBehaviour
                 skillBtnBaseFrame[i].color = Color.white;
                 skillIconFrame[i].color = Color.black;
                 skillIcon[i].color = Color.black;
-                skillBtnNames[i].color = Color.black;
+                skillBtnText[i].color = Color.black;
                 pointerSquare[i].SetActive(false);
             }
         }

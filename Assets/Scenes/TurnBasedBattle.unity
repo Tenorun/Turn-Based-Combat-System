@@ -6513,7 +6513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1933030003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6605,7 +6605,7 @@ MonoBehaviour:
   - {fileID: 137260433}
   - {fileID: 966809352}
   - {fileID: 1856407478}
-  skillBtnNames:
+  skillBtnText:
   - {fileID: 1157045930}
   - {fileID: 53009805}
   - {fileID: 518302580}
