@@ -1859,7 +1859,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1133795480, guid: 9d7398c352ae1604cbf30ed846df3f66, type: 3}
+  m_Sprite: {fileID: -682600287, guid: 9d7398c352ae1604cbf30ed846df3f66, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3008,8 +3008,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "(\uC0C1\uB300\uBC29\uC5D0\uAC8C \uD63C\uB780)\nMake noise in neural connection.\nIf
-    command done perfectely, effects all enemy"
+  m_text: (Gives confusion to 1 enemy)\nTwists one's neural connect...\nthose wires
+    and\nwanna hear about a plush in a watermelon?\nwait, what was I doing? anyway
+    it makes confusion\nIf done perfectly, chances of success are doubled.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}
   m_sharedMaterial: {fileID: -5713389171298051372, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}
@@ -3786,7 +3787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1133795480, guid: 9d7398c352ae1604cbf30ed846df3f66, type: 3}
+  m_Sprite: {fileID: 709467995, guid: 9d7398c352ae1604cbf30ed846df3f66, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5932,7 +5933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBE0C\uB808\uC778 \uB178\uC774\uC988"
+  m_text: "\uB9AC\uBC14\uC774\uBE0C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96055dc6c9a1b1246a526f8828fdd8a8, type: 2}
   m_sharedMaterial: {fileID: 6308091994926306916, guid: 96055dc6c9a1b1246a526f8828fdd8a8, type: 2}
