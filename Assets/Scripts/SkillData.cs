@@ -112,11 +112,11 @@ public class SkillData : MonoBehaviour
             new string[] { "(아군 1명 HP 240 회복)\n회복의 힘으로 회복한다.\n타이밍 맞추면 HP 480 회복.", "(Heals 1 ally 240 HP)\nHeals with power of heal\nIf done perfectly, heals 480 HP" }, 1));
         
         SkillDatabase.AddSkill(new Skill(8, 3, new string[] { "회복B I", "Heal-B I" }, 20, 
-            new string[] { "(아군 전체 HP 30 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 60 회복.", "(Heals all ally 30 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
+            new string[] { "(아군 전체 HP 30 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 60 회복.", "(Heals all allies 30 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
         SkillDatabase.AddSkill(new Skill(9, 3, new string[] { "회복B II", "Heal-B II" }, 55, 
-            new string[] { "(아군 전체 HP 75 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 150 회복.", "(Heals all ally 75 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
+            new string[] { "(아군 전체 HP 75 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 150 회복.", "(Heals all allies 75 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
         SkillDatabase.AddSkill(new Skill(10, 3, new string[] { "회복B III", "Heal-B III" }, 140, 
-            new string[] { "(아군 전체 HP 180 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 360 회복.", "(Heals all ally 30 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
+            new string[] { "(아군 전체 HP 180 회복)\n치유해서 더 좋은 세상을 만든다. 너와 나를 위해서.\n타이밍 맞추면 HP 360 회복.", "(Heals all allies 30 HP)\nIt makes a better place\nFor you and for me\nIf done perfectly, heals 60 HP." }, 5));
 
         SkillDatabase.AddSkill(new Skill(11, 3, new string[] { "리프레시", "Refresh" }, 20, 
             new string[] { "(아군 1명 상태이상 회복)\n왠지 모르게 민트향이 난다.\n타이밍 맞추면 모든 아군의 상태이상 회복.", "(Removes 1 ally's bad effects)\nSmells Like Mint Spirit\nIf done perfectly, Removes all ally's bad effects." }, 1));
@@ -127,9 +127,9 @@ public class SkillData : MonoBehaviour
         SkillDatabase.AddSkill(new Skill(13, 2, new string[] { "브레인노이즈 A", "BrainNoise A" }, 20, 
             new string[] { "(적 1명에 혼란 상태이상)\n신경 흐름을 꼬아...\n놓은 면발의 국수 였고 어제 저녁은, 오늘은 그래서 뭘 먹을까.\n그러니까 이럴게 아니라 방이 너무 더럽잖아!\n 아 잠깐 이럴때가 아니지. 아무튼 집중력을 흐린다.\n타이밍 맞추면 성공률 2배.", "(Gives confusion to 1 enemy)\nTwists one's neural connect...\nthose wires and\nwanna hear about a plush in a watermelon?\nwait, what was I doing? anyway it makes confusion\nIf done perfectly, chances of success are doubled."}, 2));
         SkillDatabase.AddSkill(new Skill(14, 2, new string[] { "브레인노이즈 B", "BrainNoise B" }, 65,
-            new string[] { "(적 전체에 혼란 상태이상)\n……\n잠시만요……\n아! 신경 흐름을 꼬아 모두에게 혼란을 준다네요.\n타이밍 맞추면 성공률 2배", "(Gives confusion to all enemy)\n……\ngive me some seconds……\nOh, it says it gives confusion by twisting their neural connections.\nIf done perfectly, chances of success are doubled." }, 6));
+            new string[] { "(적 전체에 혼란 상태이상)\n……\n잠시만요 지금 생각중이에요……\n아! 신경 흐름을 꼬아 모두에게 혼란을 준다네요.\n타이밍 맞추면 성공률 2배", "(Gives confusion to all enemy)\n……\ngive me some seconds I'm thinking something……\nOh, it says it gives confusion by twisting their neural connections.\nIf done perfectly, chances of success are doubled." }, 6));
 
-
+        SkillDatabase.AddSkill(new Skill(15, 4, new string[] { "아드레날린 부스트", "Adrenaline Boost" }, 15, new string[] { "(아군 1명에 적용)\n아드레날린의 양을 증가시켜 일시적으로 공격성을 올린다.\n타이밍 맞추면 아군 모두에게 적용.", "(Applies to 1 ally)\nMake more offensive temporary by increasing adrenaline amount.\nIf done perfectely, the effect applies to all allies." }, 1));
     }
 
 
@@ -162,7 +162,7 @@ public class SkillData : MonoBehaviour
     }
 
     //원격 아이템 검색
-    public void RemoteSearchSkill(int skillID)
+    public void SetSearchSkill(int skillID)
     {
         skill = SkillDatabase.GetSkill(skillID);
     }

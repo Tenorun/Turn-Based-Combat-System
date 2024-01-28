@@ -84,6 +84,9 @@ public class PlayerCharacterData : MonoBehaviour
         // 장신구
         public int Accessory { get; set; }
 
+        // 스킬 슬롯
+        public int[] SkillSlot = new int[4];
+
         // 레벨
         public int Level { get; set; }
 
@@ -94,7 +97,7 @@ public class PlayerCharacterData : MonoBehaviour
         public int[] GrowthPotential { get; set; }
 
         // 생성자
-        public PlayerCharacter(int characterId, string[] characterName, int maxHp, int maxSp, int attack, int defense, int specialAttack, int specialDefense, int speed, int luck, int weapon, int armor, int accessory, int level, int experience, int[] growthPotential)
+        public PlayerCharacter(int characterId, string[] characterName, int maxHp, int maxSp, int attack, int defense, int specialAttack, int specialDefense, int speed, int luck, int weapon, int armor, int accessory, int[] skillSlot, int level, int experience, int[] growthPotential)
         {
             this.CharacterId = characterId;
             this.CharacterName = characterName;
@@ -112,6 +115,7 @@ public class PlayerCharacterData : MonoBehaviour
             this.Weapon = weapon;
             this.Armor = armor;
             this.Accessory = accessory;
+            this.SkillSlot = skillSlot;
             this.Level = level;
             this.Experience = experience;
             this.GrowthPotential = growthPotential;
@@ -139,6 +143,7 @@ public class PlayerCharacterData : MonoBehaviour
             -1,      //무기(임시로 -1로 설정)
             -2,      //방어구(임시로 -2로 설정)
             -3,      //장신구(임시로 -3으로 설정)
+            new int[4], //스킬 슬롯
             1,      //레벨
             0,       //경혐치
             new int[] { 7, 7, 3, 5, 6, 6, 4, 4 }    //성장 적성
@@ -167,5 +172,7 @@ public class PlayerCharacterData : MonoBehaviour
         character.Inventory.Add(2);
         character.Inventory.Add(2);
         Debug.Log(character.Inventory[0]);
+
+        character.SkillSlot = new int[4] { 14, 3, 15, 7 };
     }
 }

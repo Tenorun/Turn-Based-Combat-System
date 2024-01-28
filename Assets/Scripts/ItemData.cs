@@ -125,7 +125,7 @@ public class ItemData : MonoBehaviour
     }
 
     //원격 아이템 검색
-    public void RemoteSearchItem(int itemID)
+    public void SetSearchItem(int itemID)
     {
         item = ItemDatabase.GetItem(itemID);
     }

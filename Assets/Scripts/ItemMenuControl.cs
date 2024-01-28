@@ -203,7 +203,7 @@ public class ItemMenuControl : MonoBehaviour
         {
             if (previewInventory[i] != 0)
             {
-                ItemDB.GetComponent<ItemData>().RemoteSearchItem(previewInventory[i]);
+                ItemDB.GetComponent<ItemData>().SetSearchItem(previewInventory[i]);
                 itemNames[i] = ItemDB.GetComponent<ItemData>().item.ItemName[languageVal];
             }
             else
@@ -215,7 +215,7 @@ public class ItemMenuControl : MonoBehaviour
         //아이템 설명문
         if(pointingItemID != 0)
         {
-            ItemDB.GetComponent<ItemData>().RemoteSearchItem(pointingItemID);
+            ItemDB.GetComponent<ItemData>().SetSearchItem(pointingItemID);
             itemDescription = ItemDB.GetComponent<ItemData>().item.ItemDescription[languageVal];
         }
         else
