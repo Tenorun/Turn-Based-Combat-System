@@ -173,6 +173,6 @@ public class PlayerCharacterData : MonoBehaviour
         character.Inventory.Add(2);
         Debug.Log(character.Inventory[0]);
 
-        character.SkillSlot = new int[4] { 14, 3, 15, 7 };
+        character.SkillSlot = new int[4] { 14, 3, 15, 0 };
     }
 }

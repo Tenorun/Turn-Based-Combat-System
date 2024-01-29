@@ -1016,7 +1016,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: -2}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &143843303
 MonoBehaviour:
@@ -1588,7 +1588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &248878591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36cbfcececf573d4abe0a532e5a04add, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f3d553a99a741f45b33daeeeae8564d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2646,7 +2646,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: -2}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661671984
 MonoBehaviour:
@@ -2971,7 +2971,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: -2}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &800156067
 MonoBehaviour:
@@ -3205,9 +3205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (Gives confusion to 1 enemy)\nTwists one's neural connect...\nthose wires
-    and\nwanna hear about a plush in a watermelon?\nwait, what was I doing? anyway
-    it makes confusion\nIf done perfectly, chances of success are doubled.
+  m_text: 0123456789
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}
   m_sharedMaterial: {fileID: -5713389171298051372, guid: 84e3f0a03d5866344b99a9bfcfd055e0, type: 2}
@@ -5548,7 +5546,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: -2}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590551868
 MonoBehaviour:
@@ -6787,7 +6785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1933030003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6859,6 +6857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8fdcfc944d48e4880426ce02b8e851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSlotFilled: 01010101
   skillDatabase: {fileID: 712028026}
   playerCharDatabase: {fileID: 1631315384}
   battleMaster: {fileID: 704444433}
@@ -6881,6 +6880,7 @@ MonoBehaviour:
   - {fileID: -599006977, guid: f4e63a8fa7a7b244ab7e52b7a341b58e, type: 3}
   - {fileID: -215959372, guid: f4e63a8fa7a7b244ab7e52b7a341b58e, type: 3}
   - {fileID: 420131183, guid: f4e63a8fa7a7b244ab7e52b7a341b58e, type: 3}
+  - {fileID: -468279456, guid: f4e63a8fa7a7b244ab7e52b7a341b58e, type: 3}
   skillIcon:
   - {fileID: 143843303}
   - {fileID: 661671984}

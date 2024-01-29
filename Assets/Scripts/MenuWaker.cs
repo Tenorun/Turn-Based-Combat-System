@@ -10,7 +10,7 @@ public class MenuWaker : MonoBehaviour
     public GameObject SkillMenuFrame;
 
     const float _minTopValue_ = -287f;                  //창의 최소 길이
-    const float _maxTopValue_ = -170f;                   //창의 최대 길이
+    const float _maxTopValue_ = -170f;                  //창의 최대 길이
     const float _movingSpeed_ = 100f;                   //창 확대 축소 속도
 
     private float topValue;                             //창의 길이

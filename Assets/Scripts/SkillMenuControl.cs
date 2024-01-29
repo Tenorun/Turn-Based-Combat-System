@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class SkillMenuControl : MonoBehaviour
 {
+    public bool[] isSlotFilled = new bool[4] { true, true, true, true };
+
     private int languageVal;
 
     public GameObject skillDatabase;
@@ -26,7 +28,7 @@ public class SkillMenuControl : MonoBehaviour
     public TextMeshProUGUI skillDescriptionNameText;
     public TextMeshProUGUI skillDescriptionText;
 
-    private string[,] skillTypeName = new string[8, 2] 
+    private string[,] skillTypeName = new string[9, 2]
     { {"특수 공격", "Special attack" }
         ,{"물리 공격", "Physical attack"}
         ,{"상태 이상", "Bad effect"}
@@ -34,7 +36,8 @@ public class SkillMenuControl : MonoBehaviour
         ,{"스텟 업", "Buff"}
         ,{"스텟 다운", "Debuff"}
         ,{"스텟 변화", "Status change"}
-        ,{"기타", "Etc"} };
+        ,{"기타", "Etc"}
+        ,{"",""}};
     public TextMeshProUGUI skillTypeText;
 
     public Sprite[] digitImage;
@@ -58,6 +61,15 @@ public class SkillMenuControl : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
     }
 
+    void SetSlotFillStatus()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (skillSlotCache[i] == 0) isSlotFilled[i] = false;
+            else isSlotFilled[i] = true;
+        }
+    }
+
     void GetCache()
     {
 
@@ -78,6 +90,8 @@ public class SkillMenuControl : MonoBehaviour
             skillCostCache[i] = skillDatabase.GetComponent<SkillData>().skill.SkillCost;                                //SP 비용
         }
     }
+
+    
 
     //0 1
     //2 3
@@ -120,6 +134,7 @@ public class SkillMenuControl : MonoBehaviour
             //선택 여부에 따른 업데이트
             if (i == currentSelectNum)
             {
+
                 //선택 버튼 업데이트
                 skillBtnBaseFrame[i].color = Color.black;
                 skillIconFrame[i].color = Color.white;
@@ -134,7 +149,11 @@ public class SkillMenuControl : MonoBehaviour
                 //스킬 타입 이름 변경
                 skillTypeText.text = skillTypeName[skillTypeCache[i], languageVal];
 
-                skillCostString = skillCostCache[i].ToString();
+
+                //스킬 비용 표시
+
+                if (isSlotFilled[i]) skillCostString = skillCostCache[i].ToString();
+                else skillCostString = "";
 
                 for(int j = 0; j < 3; j++)
                 {
@@ -161,6 +180,14 @@ public class SkillMenuControl : MonoBehaviour
         }
     }
 
+    void ExecuteSkill(int skillID)
+    {
+        if(Input.GetButtonDown("Submit") && skillID != 0)
+        {
+            skillDatabase.GetComponent<SkillData>().UseSkillEffect(skillID);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -173,9 +200,12 @@ public class SkillMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetCache();
+        SetSlotFillStatus();
+
         GetDirectionalInput();
         UpdateCurrentSelectionNum();
-        GetCache();
+        ExecuteSkill(skillSlotCache[currentSelectNum]);
 
         UpdateDisplay();
     }

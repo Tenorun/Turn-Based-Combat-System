@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class SkillData : MonoBehaviour
@@ -50,6 +51,7 @@ public class SkillData : MonoBehaviour
           5(아래 방향 >>): 스텟 하락
           6( )( ): 스텟 변화 (스텟의 상승과 하락 모두 있는것)
           7(기하학적인 문양): 위 항목에서 속하지 않는것들
+          8(x): 비어있음
         */
         
         
@@ -94,6 +96,8 @@ public class SkillData : MonoBehaviour
     void Start()
     {
         languageVal = 0;        //디버그용
+
+        SkillDatabase.AddSkill(new Skill(0, 8, new string[] { "-비어있음-", "-Empty-" }, 0, new string[] { "이 슬롯에 스킬이 할당되지 않았습니다.", "Skill is not assigned in this slot." }, -1));
 
         SkillDatabase.AddSkill(new Skill(1, 0, new string[] { "에코즈 I", "Echoes I" }, 20, 
             new string[] { "(적 전체에 공격)\n에너지의 파동으로 적 전체를 공격한다.\n타이밍 맞출시 데미지 1.5배.", "(Attacks all enemy)\nAttacks all enemy with energy waves.\nIf done perfectly, 1.5 times stronger damage." }, 6));
@@ -155,8 +159,38 @@ public class SkillData : MonoBehaviour
             case 5:
                 Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
                 break;
+            case 6:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 7:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 8:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 9:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 10:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 11:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 12:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 13:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 14:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
+            case 15:
+                Debug.Log($"{skill.SkillName[languageVal]}을(를) 사용함");
+                break;
             default:
-                Debug.LogError($"스킬 고유번호 {skillId}에 해당하는 아이템은 존재하지 않습니다.");
+                Debug.LogError($"스킬 ID: {skillId}에 해당하는 스킬은 존재하지 않습니다.");
                 break;
         }
     }
