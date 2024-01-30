@@ -243,7 +243,7 @@ public class ItemMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().charSelecting);
+        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
 
         GetDirectionalInput();
         UpdateItemArrowNum();
@@ -258,7 +258,7 @@ public class ItemMenuControl : MonoBehaviour
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().charSelecting);
+        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
         GetPreviewInventory();
     }
 }

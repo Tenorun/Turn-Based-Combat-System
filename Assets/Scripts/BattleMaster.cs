@@ -5,10 +5,13 @@ public class BattleMaster : MonoBehaviour
 
     bool isSelectPhase = true;
 
-    public int charSelecting;
+    public int IDofSelectingChar;               //현재 선택중인 캐릭터의 ID
+
+    public int curSelectOrderNum;               //현재 선택중인 파티원의 번째
     void Start()
     {
-        charSelecting = 1;
+        IDofSelectingChar = 1;
+        curSelectOrderNum = 2;
     }
     
 

@@ -54,6 +54,9 @@ public class PlayerCharacterData : MonoBehaviour
         // 현재 SP
         public int CurrentSp { get; set; }
 
+        // 상태 이상
+        public int CurrentEffect {  get; set; }
+
         // 공격력
         public int Attack { get; set; }
 
@@ -105,6 +108,7 @@ public class PlayerCharacterData : MonoBehaviour
             this.CurrentHp = maxHp;
             this.MaxSp = maxSp;
             this.CurrentSp = maxSp;
+            this.CurrentEffect = 0;
             this.Attack = attack;
             this.Defense = defense;
             this.SpecialAttack = specialAttack;
@@ -132,8 +136,8 @@ public class PlayerCharacterData : MonoBehaviour
         PlayerCharacterDatabase.AddPlayer(new PlayerCharacter(
             1,      //캐릭터 ID
             new string[] {"벤드 화이트홀", "Bend Whitehall"},
-            40,     //최대 HP
-            25,     //최대 SP
+            45,     //최대 HP
+            45,     //최대 SP
             11,     //공격력
             14,     //방어력
             15,     //특공
@@ -157,22 +161,46 @@ public class PlayerCharacterData : MonoBehaviour
 
         //테스트 인벤토리
         character = PlayerCharacterDatabase.GetPlayer(1);
-        Debug.Log(character.CharacterName[0]);
 
         character.Inventory.Add(1);
         character.Inventory.Add(2);
         character.Inventory.Add(3);
         character.Inventory.Add(4);
-        character.Inventory.Add(5);//
+        character.Inventory.Add(5);
         character.Inventory.Add(4);
         character.Inventory.Add(2);
         character.Inventory.Add(2);
         character.Inventory.Add(1);
-        character.Inventory.Add(5);//
+        character.Inventory.Add(5);
         character.Inventory.Add(2);
         character.Inventory.Add(2);
-        Debug.Log(character.Inventory[0]);
 
         character.SkillSlot = new int[4] { 14, 3, 15, 0 };
+
+
+
+
+
+        PlayerCharacterDatabase.AddPlayer(new PlayerCharacter(
+            2,      //캐릭터 ID
+            new string[] { "애니 에놀라", "Annie Enola" },
+            30,     //최대 HP
+            60,     //최대 SP
+            11,     //공격력
+            14,     //방어력
+            15,     //특공
+            15,     //특방
+            12,     //속도
+            13,     //행운
+            -1,      //무기(임시로 -1로 설정)
+            -2,      //방어구(임시로 -2로 설정)
+            -3,      //장신구(임시로 -3으로 설정)
+            new int[4], //스킬 슬롯
+            1,      //레벨
+            0,       //경혐치
+            new int[] { 7, 7, 3, 5, 6, 6, 4, 4 }    //성장 적성
+            ));
+        character = PlayerCharacterDatabase.GetPlayer(2);
+        character.Inventory.Add(3);
     }
 }
