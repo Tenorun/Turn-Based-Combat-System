@@ -132,8 +132,8 @@ public class PlayerCharacterData : MonoBehaviour
         PlayerCharacterDatabase.AddPlayer(new PlayerCharacter(
             1,      //캐릭터 ID
             new string[] {"벤드 화이트홀", "Bend Whitehall"},
-            40,     //최대 HP
-            25,     //최대 SP
+            45,     //최대 HP
+            45,     //최대 SP
             11,     //공격력
             14,     //방어력
             15,     //특공
