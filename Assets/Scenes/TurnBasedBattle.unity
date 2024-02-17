@@ -3710,7 +3710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c20c6c38a3e27742ac0ecf59b92af56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charSelecting: 0
+  IDofSelectingChar: 0
+  curSelectOrderNum: 0
 --- !u!114 &704444436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8310,7 +8311,6 @@ GameObject:
   - component: {fileID: 1760434766}
   - component: {fileID: 1760434765}
   - component: {fileID: 1760434768}
-  - component: {fileID: 1760434767}
   m_Layer: 5
   m_Name: Character 1
   m_TagString: Untagged
@@ -8379,28 +8379,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760434763}
   m_CullTransparentMesh: 1
---- !u!114 &1760434767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760434763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d68a493e411e9943bfa574da13ca89d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerCharData: {fileID: 1631315384}
-  characterID: 1
-  StatusText: {fileID: 0}
-  DigitImage: []
-  HPDisplay: []
-  SPDisplay: []
-  HPBar: {fileID: 0}
-  SPBar: {fileID: 0}
-  HPDownTrigger: 0
-  SPDownTrigger: 0
 --- !u!114 &1760434768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8414,6 +8392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCharData: {fileID: 1631315384}
+  BattleMaster: {fileID: 704444433}
+  displayerID: 1
   characterID: 1
   StatusText: {fileID: 687653880}
   DigitImage:
@@ -8439,6 +8419,11 @@ MonoBehaviour:
   SPBar: {fileID: 900641291}
   HPDownTrigger: 0
   SPDownTrigger: 0
+  BaseFrame: {fileID: 1760434765}
+  EdgeLine: {fileID: 1761781541}
+  PortraitFrame: {fileID: 1143651968}
+  StatusFrame: {fileID: 1471594654}
+  HitAndSpecialStencil: {fileID: 876132307}
 --- !u!1 &1761781539
 GameObject:
   m_ObjectHideFlags: 0
@@ -9678,6 +9663,7 @@ GameObject:
   - component: {fileID: 1945966743}
   - component: {fileID: 1945966745}
   - component: {fileID: 1945966744}
+  - component: {fileID: 1945966746}
   m_Layer: 5
   m_Name: Character 2
   m_TagString: Untagged
@@ -9746,6 +9732,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945966742}
   m_CullTransparentMesh: 1
+--- !u!114 &1945966746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945966742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d68a493e411e9943bfa574da13ca89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCharData: {fileID: 1631315384}
+  BattleMaster: {fileID: 704444433}
+  displayerID: 2
+  characterID: 2
+  StatusText: {fileID: 156944671}
+  DigitImage:
+  - {fileID: -588659703, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 1943407475, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: -2117934455, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 356512191, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: -1757505729, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 911292929, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 907010080, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 1210588975, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: 760388192, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  - {fileID: -1007913132, guid: c2eb28c8c4f245e47aa0ea72d80b6493, type: 3}
+  HPDisplay:
+  - {fileID: 501503021}
+  - {fileID: 978551714}
+  - {fileID: 1315231712}
+  SPDisplay:
+  - {fileID: 97798275}
+  - {fileID: 1203142318}
+  - {fileID: 1268514374}
+  HPBar: {fileID: 2098477413}
+  SPBar: {fileID: 1114535951}
+  HPDownTrigger: 0
+  SPDownTrigger: 0
+  BaseFrame: {fileID: 1945966744}
+  EdgeLine: {fileID: 1063027094}
+  PortraitFrame: {fileID: 1873190786}
+  StatusFrame: {fileID: 37419466}
+  HitAndSpecialStencil: {fileID: 1686546878}
 --- !u!1 &2002171783
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,7 +74,7 @@ public class SkillMenuControl : MonoBehaviour
     {
 
         //현재 선택중인 캐릭터로 검색 설정
-        playerCharDatabase.GetComponent<PlayerCharacterData>().SetSearchCharacter(battleMaster.GetComponent<BattleMaster>().charSelecting);
+        playerCharDatabase.GetComponent<PlayerCharacterData>().SetSearchCharacter(battleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
 
         //캐릭터 스킬 슬롯 캐시 업데이트
         skillSlotCache = playerCharDatabase.GetComponent<PlayerCharacterData>().character.SkillSlot;
