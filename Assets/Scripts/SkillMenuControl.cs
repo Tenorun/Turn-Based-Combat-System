@@ -9,7 +9,7 @@ public class SkillMenuControl : MonoBehaviour
 {
     public bool[] isSlotFilled = new bool[4] { true, true, true, true };
 
-    private int languageVal;
+    private int languageVal;                                    //언어 값
 
     public GameObject skillDatabase;
     public GameObject playerCharDatabase;
@@ -28,7 +28,7 @@ public class SkillMenuControl : MonoBehaviour
     public TextMeshProUGUI skillDescriptionNameText;
     public TextMeshProUGUI skillDescriptionText;
 
-    private string[,] skillTypeName = new string[9, 2]
+    private string[,] skillTypeName = new string[9, 2]          //스킬 타입 이름
     { {"특수 공격", "Special attack" }
         ,{"물리 공격", "Physical attack"}
         ,{"상태 이상", "Bad effect"}
@@ -191,7 +191,7 @@ public class SkillMenuControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        languageVal = skillDatabase.GetComponent<SkillData>().languageVal;
+        languageVal = battleMaster.GetComponent<BattleMaster>().languageVal;
         currentSelectNum = 0;
 
         GetCache();

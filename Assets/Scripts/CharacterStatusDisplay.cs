@@ -191,6 +191,8 @@ public class CharacterStatusDisplay : MonoBehaviour
             PlayerCharData.GetComponent<PlayerCharacterData>().character.CurrentSp -= 10;
             UpdateDisplay(characterID);
         }
+
+        UpdateDisplay(characterID);
     }
 
     IEnumerator LateStart(float waitTime)

@@ -21,16 +21,16 @@ public class MenuWaker : MonoBehaviour
 
 
     //메뉴 깨우기 호출
-    public void SetWakeMenu(bool displayStatus, int inputNum)
+    public void SetChangeMenu(bool displayStatus, int inputNum)
     {
         switch (inputNum)
         {
             case 1:
-                SetChangeMenuSize(true);
+                SetChangeMenuSize(displayStatus);
                 SkillMenuFrame.SetActive(displayStatus);
                 break;
             case 2:
-                SetChangeMenuSize(true);
+                SetChangeMenuSize(displayStatus);
                 ItemMenuFrame.SetActive(displayStatus);
                 break;
             case 4:
@@ -109,7 +109,7 @@ public class MenuWaker : MonoBehaviour
         uiRectTransform = GetComponent<RectTransform>();
 
         uiRectTransform.offsetMax = new Vector2(-159, _minTopValue_);
-        SetWakeMenu(false, 4);
+        SetChangeMenu(false, 4);
     }
 
     // Update is called once per frame

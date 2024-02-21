@@ -3710,7 +3710,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c20c6c38a3e27742ac0ecf59b92af56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharStatusWindows:
+  - {fileID: 1760434763}
+  - {fileID: 1945966742}
+  PlayerCharDB: {fileID: 1631315384}
+  ItemDB: {fileID: 2038756590}
+  SkillDB: {fileID: 712028026}
+  languageVal: 0
+  isEscapable: 0
   IDofSelectingChar: 0
+  assignedChar: 0000000000000000
   curSelectOrderNum: 0
 --- !u!114 &704444436
 MonoBehaviour:
@@ -3754,7 +3763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f77cd587408fd14cb15879165047a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageVal: 0
 --- !u!4 &712028028
 Transform:
   m_ObjectHideFlags: 0
@@ -3861,8 +3869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d15cf9ec6bf93348b25647f13047e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BattleMaster: {fileID: 704444433}
+  battleMaster: {fileID: 704444433}
   ItemDB: {fileID: 2038756590}
+  Menu: {fileID: 622487741}
   ItemPointerArrows:
   - {fileID: 1400951946}
   - {fileID: 106209430}
@@ -8312,7 +8321,7 @@ GameObject:
   - component: {fileID: 1760434765}
   - component: {fileID: 1760434768}
   m_Layer: 5
-  m_Name: Character 1
+  m_Name: Character 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8393,7 +8402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCharData: {fileID: 1631315384}
   BattleMaster: {fileID: 704444433}
-  displayerID: 1
+  displayerID: 0
   characterID: 1
   StatusText: {fileID: 687653880}
   DigitImage:
@@ -9665,7 +9674,7 @@ GameObject:
   - component: {fileID: 1945966744}
   - component: {fileID: 1945966746}
   m_Layer: 5
-  m_Name: Character 2
+  m_Name: Character 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9746,7 +9755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCharData: {fileID: 1631315384}
   BattleMaster: {fileID: 704444433}
-  displayerID: 2
+  displayerID: 1
   characterID: 2
   StatusText: {fileID: 156944671}
   DigitImage:
@@ -10277,7 +10286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f0487536035264cb2851a5a80bb20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageVal: 0
 --- !u!1 &2041416312
 GameObject:
   m_ObjectHideFlags: 0

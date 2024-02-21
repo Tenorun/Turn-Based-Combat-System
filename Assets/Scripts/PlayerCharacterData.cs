@@ -202,5 +202,7 @@ public class PlayerCharacterData : MonoBehaviour
             ));
         character = PlayerCharacterDatabase.GetPlayer(2);
         character.Inventory.Add(3);
+        character.Inventory.Add(3);
+        character.Inventory.Add(3);
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
-    public int languageVal;         //디버그용
     public Item item;
     // 아이템 데이터베이스 클래스
     public class ItemDatabase
@@ -50,7 +49,7 @@ public class ItemData : MonoBehaviour
 
         // 사용 대상 값
         /*사용 대상 번호
-            -1: 사용 불가
+            -1: 대상 없음
             0: 전체중 1명
             1: 아군중 1명
             2: 적중 1명
@@ -76,7 +75,6 @@ public class ItemData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        languageVal = 0;        //디버그용
 
         //아이템 데이터 베이스에 추가
         //ItemDatabase.AddItem(new Item((아이템 고유번호), new string[] { "(아이템 한국어 이름)", "(아이템 영어 이름)"}, new string[] { "(한국어 설명문)", "(영어 설명문)" }, new string[] { "(한국어 사용 특수 대사)", "(영어 사용 특수 대사)" }, (0~6 사용대상 값)));
@@ -104,19 +102,19 @@ public class ItemData : MonoBehaviour
         switch (itemId)
         {
             case 1:
-                Debug.Log($"{item.ItemName[languageVal]}을(를) 사용함");
-                break;
+                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                break; 
             case 2:
-                Debug.Log($"{item.ItemName[languageVal]}을(를) 사용함");
+                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
                 break;
             case 3:
-                Debug.Log($"{item.ItemName[languageVal]}을(를) 사용함");
+                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
                 break;
             case 4:
-                Debug.Log($"{item.ItemName[languageVal]}을(를) 사용함");
+                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
                 break;
             case 5:
-                Debug.Log($"{item.ItemName[languageVal]}을(를) 사용함");
+                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
                 break;
             default:
                 Debug.LogError($"아이템 고유번호 {itemId}에 해당하는 아이템은 존재하지 않습니다.");
