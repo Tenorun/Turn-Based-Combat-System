@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class ItemMenuControl : MonoBehaviour
 {
     //TODO: ItemMenuPointer, ItemMenuPointer, ItemExecuter로 파편화된 코드를 하나로 통합시키는 것.
-    public GameObject BattleMaster;
+    public GameObject battleMaster;
     public GameObject ItemDB;
+    public GameObject Menu;
 
     public Image[] ItemPointerArrows;                   //아이템 화살표 오브젝트 이미지
     public int itemArrowNum = 0;                        //아이템 화살표 번호
@@ -45,6 +46,8 @@ public class ItemMenuControl : MonoBehaviour
     public TextMeshProUGUI DescriptionItemNameText;     //아이템 설명문 표시 이름
     public TextMeshProUGUI ItemDescriptionText;         //아이템 설명문
 
+    private int currentCharID;                          //현재 캐릭터 ID
+    private int prevCharID;                             //이전 캐릭터 ID
     public string[] itemNames = new string[5];          //아이템 이름
     public string itemDescription;                      //아이템 설명문
 
@@ -174,6 +177,11 @@ public class ItemMenuControl : MonoBehaviour
     {
         PlayerCharDB.GetComponent<PlayerCharacterData>().SetSearchCharacter(selectingCharNum);
         inventoryCache = PlayerCharDB.GetComponent<PlayerCharacterData>().character.Inventory;
+        if(prevCharID != currentCharID)
+        {
+            itemArrowNum = 0;
+            currentPageNum = 1;
+        }
     }
 
     //표시 인벤토리 업데이트
@@ -196,7 +204,7 @@ public class ItemMenuControl : MonoBehaviour
     //이름, 설명문 얻기
     void GetNameAndDescription()
     {
-        int languageVal = ItemDB.GetComponent<ItemData>().languageVal;
+        int languageVal = battleMaster.GetComponent<BattleMaster>().languageVal;
 
         //아이템 이름
         for (int i = 0; i < 5; i++)
@@ -229,7 +237,13 @@ public class ItemMenuControl : MonoBehaviour
     {
         if(Input.GetButtonDown("Submit") && pointingItemID != 0)
         {
+            ItemDB.GetComponent<ItemData>().SetSearchItem(pointingItemID);
+            int useTarget = ItemDB.GetComponent<ItemData>().item.UseTarget;
+
             ItemDB.GetComponent<ItemData>().UseItemEffect(pointingItemID);
+            battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 2, pointingItemID, useTarget);
+
+            Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
         }
     }
 
@@ -243,7 +257,9 @@ public class ItemMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
+        prevCharID = currentCharID;
+        currentCharID = battleMaster.GetComponent<BattleMaster>().IDofSelectingChar;
+        GetInventoryCache(battleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
 
         GetDirectionalInput();
         UpdateItemArrowNum();
@@ -258,7 +274,7 @@ public class ItemMenuControl : MonoBehaviour
     IEnumerator LateStart(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        GetInventoryCache(BattleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
+        GetInventoryCache(battleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
         GetPreviewInventory();
     }
 }

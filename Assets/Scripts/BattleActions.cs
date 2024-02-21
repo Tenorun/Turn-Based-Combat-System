@@ -34,13 +34,13 @@ public class BattleActions : MonoBehaviour
     {
         if (!CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(true, 1);
+            MenuFrame.GetComponent<MenuWaker>().SetChangeMenu(true, 1);
             Debug.Log("스킬");
         }
         else
         {
             MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 1);
+            MenuFrame.GetComponent<MenuWaker>().SetChangeMenu(false, 1);
         }
     }
 
@@ -48,13 +48,13 @@ public class BattleActions : MonoBehaviour
     {
         if (!CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(true, 2);
+            MenuFrame.GetComponent<MenuWaker>().SetChangeMenu(true, 2);
             Debug.Log("아이템");
         }
         else
         {
             MenuFrame.GetComponent<ActionButton>().isActBtnLocked = false;
-            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 2);
+            MenuFrame.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
         }
     }
 
@@ -74,7 +74,7 @@ public class BattleActions : MonoBehaviour
     {
         if (CheckCompletelyExpended())
         {
-            MenuFrame.GetComponent<MenuWaker>().SetWakeMenu(false, 4);
+            MenuFrame.GetComponent<MenuWaker>().SetChangeMenu(false, 4);
             Debug.Log("취소");
         }
         else
