@@ -233,17 +233,17 @@ public class ItemMenuControl : MonoBehaviour
     }
 
     //아이템 실행하기
-    void ExecuteItem()
+    void SubmitItem()
     {
         if(Input.GetButtonDown("Submit") && pointingItemID != 0)
         {
             ItemDB.GetComponent<ItemData>().SetSearchItem(pointingItemID);
-            int useTarget = ItemDB.GetComponent<ItemData>().item.UseTarget;
+            int targetType = ItemDB.GetComponent<ItemData>().item.UseTarget;
 
-            ItemDB.GetComponent<ItemData>().UseItemEffect(pointingItemID);
-            battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 2, pointingItemID, useTarget);
+            battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 2, pointingItemID, targetType);
 
             Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
+            ItemDB.GetComponent<ItemData>().UseItemEffect(pointingItemID);   //디버그용
         }
     }
 
@@ -268,7 +268,7 @@ public class ItemMenuControl : MonoBehaviour
         GetNameAndDescription();
         UpdateDisplay();
 
-        ExecuteItem();
+        SubmitItem();
     }
 
     IEnumerator LateStart(float waitTime)
