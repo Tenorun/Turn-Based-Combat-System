@@ -14,6 +14,7 @@ public class SkillMenuControl : MonoBehaviour
     public GameObject skillDatabase;
     public GameObject playerCharDatabase;
     public GameObject battleMaster;
+    public GameObject Menu;
 
     public Image[] skillBtnBaseFrame;
 
@@ -51,7 +52,7 @@ public class SkillMenuControl : MonoBehaviour
     private int[] skillCostCache = new int[4];
 
     public int currentSelectNum = 0;
-
+    private int currentCharID;                                  //현재 캐릭터 ID
 
     private float verticalInput = 0f;
     private float horizontalInput = 0f;
@@ -74,7 +75,7 @@ public class SkillMenuControl : MonoBehaviour
     {
 
         //현재 선택중인 캐릭터로 검색 설정
-        playerCharDatabase.GetComponent<PlayerCharacterData>().SetSearchCharacter(battleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
+        playerCharDatabase.GetComponent<PlayerCharacterData>().SetSearchCharacter(currentCharID);
 
         //캐릭터 스킬 슬롯 캐시 업데이트
         skillSlotCache = playerCharDatabase.GetComponent<PlayerCharacterData>().character.SkillSlot;
@@ -180,11 +181,18 @@ public class SkillMenuControl : MonoBehaviour
         }
     }
 
-    void ExecuteSkill(int skillID)
+    void SubmitSkill(int skillID)
     {
         if(Input.GetButtonDown("Submit") && skillID != 0)
         {
-            skillDatabase.GetComponent<SkillData>().UseSkillEffect(skillID);
+            skillDatabase.GetComponent<SkillData>().SetSearchSkill(skillID);
+            int targetType = skillDatabase.GetComponent<SkillData>().skill.UseTarget;
+
+            battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 1, skillID, targetType);
+
+            Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 1);
+
+            skillDatabase.GetComponent<SkillData>().UseSkillEffect(skillID);        //디버그용
         }
     }
 
@@ -192,6 +200,7 @@ public class SkillMenuControl : MonoBehaviour
     void Start()
     {
         languageVal = battleMaster.GetComponent<BattleMaster>().languageVal;
+        currentCharID = battleMaster.GetComponent<BattleMaster>().IDofSelectingChar;
         currentSelectNum = 0;
 
         GetCache();
@@ -200,12 +209,14 @@ public class SkillMenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentCharID = battleMaster.GetComponent<BattleMaster>().IDofSelectingChar;
+
         GetCache();
         SetSlotFillStatus();
 
         GetDirectionalInput();
         UpdateCurrentSelectionNum();
-        ExecuteSkill(skillSlotCache[currentSelectNum]);
+        SubmitSkill(skillSlotCache[currentSelectNum]);
 
         UpdateDisplay();
     }
