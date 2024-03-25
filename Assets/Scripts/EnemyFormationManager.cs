@@ -1,11 +1,9 @@
-using System;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor;
 using UnityEngine;
 
-public class EnemyDisplay : MonoBehaviour
+public class EnemyFormationManager : MonoBehaviour
 {
     public GameObject[] enemyDisplayObject = new GameObject[5];     //적 표시 오브젝트
 
@@ -19,7 +17,7 @@ public class EnemyDisplay : MonoBehaviour
     int enemyAmount = 0;                                    //적 개수
     int nextEnemyNumber = 1;                                //다음에 할당될 적의 전투 번호
 
-    int formationTypeNum;                                   //대열 형식
+    public int formationTypeNum;                                   //대열 형식
     /*대열 형식
      1: 1개 장소 배열     ■
      2: 2개 장소 배열    ■ ■
@@ -34,7 +32,7 @@ public class EnemyDisplay : MonoBehaviour
 
 
     //적 디스플레이 시작
-    public void WakeBattleEnemyFormation(int[] enemyIDs, bool keepFirstEnemyMiddle)
+    public void WakeEnemyFormationManager(int[] enemyIDs, bool keepFirstEnemyMiddle)
     {
         //변수 초기화
         enemyAssignStatus = new int[2, 5] { { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } };
@@ -78,7 +76,7 @@ public class EnemyDisplay : MonoBehaviour
     public void RemoveEnemy(int removingEnemyNum)
     {
         int removeEnemyLocation = findEnemyLocation(removingEnemyNum);
-        if(removeEnemyLocation != -1)
+        if (removeEnemyLocation != -1)
         {
             enemyAssignStatus[0, removeEnemyLocation] = 0;
             enemyAssignStatus[1, removeEnemyLocation] = 0;
@@ -87,7 +85,14 @@ public class EnemyDisplay : MonoBehaviour
         else
         {
             Debug.LogError($"{removingEnemyNum}, 해당 적 번호의 적을 찾을 수 없습니다.");
+
+            for(int i =0; i < 5; i++)
+            {
+                Debug.LogError(enemyAssignStatus[1, i]);
+            }
         }
+
+        UpdateAssignInfo();
     }
 
 
@@ -96,7 +101,7 @@ public class EnemyDisplay : MonoBehaviour
     {
         int lastLine = findEnemyLocation(0);
 
-        if(lastLine != -1)
+        if (lastLine != -1)
         {
             enemyAssignStatus[0, lastLine] = enemyID;
             enemyAssignStatus[1, lastLine] = nextEnemyNumber;
@@ -114,7 +119,7 @@ public class EnemyDisplay : MonoBehaviour
     public void keepMiddle(int middleEnemyNum)
     {
         int originLocation = findEnemyLocation(middleEnemyNum);
-        if(originLocation != -1)
+        if (originLocation != -1)
         {
             keepSomeOneMiddle = true;
 
@@ -132,6 +137,8 @@ public class EnemyDisplay : MonoBehaviour
     //할당 상태 업데이트
     public void UpdateAssignInfo()
     {
+        //TODO: RemoveEnemy로 적을 제거 한 뒤, 할당정보를 업데이트 하면 0이 맨 오른쪽으로 밀리지 않는 버그가 있음. 이것을 고칠것.
+
         //할당 상태 배열에서 0을 모두 오른쪽으로 밀기
         int left = 0;
         int right = 4;
@@ -169,7 +176,7 @@ public class EnemyDisplay : MonoBehaviour
         {
             //적 개수가 짝수일시, 포메이션 타입을 홀수로 맞추기.
             //예) 2명: 포메이션 타입 = 2(3명 배열)/4명: 포메이션 타입 = 4(5명 배열)
-            if(enemyAmount % 2 == 0)
+            if (enemyAmount % 2 == 0)
             {
                 formationTypeNum = enemyAmount;
             }
@@ -189,14 +196,74 @@ public class EnemyDisplay : MonoBehaviour
         }
     }
 
-    void giveEnemyDirection()
+    void UpdateDisplay()
     {
-        //TODO: 할당된 적 표시기에 각각의 명령, X좌표, 적 ID를 주기.
+        for(int i = 0; i<enemyDisplayObject.Length; i++)
+        {
+            if (enemyAssignStatus[0, i] == 0)
+            {
+                //Hide Enemy
+                enemyDisplayObject[i].SetActive(false);
+            }
+            else
+            {
+                //Show Enemy
+                enemyDisplayObject[i].SetActive(true);
+            }
+
+
+        }
+
+    }
+
+    void MoveEnemy()
+    {
+        // Ensure that the enemy formation type number is within bounds
+        if (formationTypeNum < 0 || formationTypeNum >= enemyFormations.GetLength(0))
+        {
+            Debug.LogError("Invalid formation type number.");
+            return;
+        }
+
+        // Move each enemy display object to its designated position
+        for (int i = 0; i < enemyDisplayObject.Length; i++)
+        {
+            // Get the target position from the enemyFormations array
+            Vector3 targetPosition = new Vector3(enemyFormations[formationTypeNum, i], 0f, 0f); // Assuming Y and Z positions are 0
+
+            // Start coroutine for smooth movement
+            StartCoroutine(MoveEnemyCoroutine(enemyDisplayObject[i].transform, targetPosition));
+        }
+    }
+
+    // Coroutine for smooth movement of enemy display object
+    IEnumerator MoveEnemyCoroutine(Transform enemyTransform, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+        Vector3 startingPosition = enemyTransform.position;
+
+        // Move towards the target position over time
+        while (elapsedTime < 0.5f) // Moving in 0.5 seconds
+        {
+            // Calculate the interpolation ratio
+            float t = elapsedTime / 0.5f; // 0.5 seconds duration
+
+            // Smoothly move towards the target position using Lerp
+            enemyTransform.position = Vector3.Lerp(startingPosition, targetPosition, t);
+
+            // Increment elapsed time
+            elapsedTime += Time.deltaTime;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure final position is precisely the target position
+        enemyTransform.position = targetPosition;
     }
 
     int findEnemyLocation(int enemyNum)
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (enemyAssignStatus[1, i] == enemyNum)
             {
@@ -205,6 +272,10 @@ public class EnemyDisplay : MonoBehaviour
         }
         return -1;
     }
+
+    public bool testMoveEnemyTrigger = false;
+    public bool testWakeFormationManagerTrigger = false;
+    public bool removeEnemyTrigger = false;
 
     void Start()
     {
@@ -220,6 +291,23 @@ public class EnemyDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (testWakeFormationManagerTrigger)
+        {
+            testWakeFormationManagerTrigger = false;
+            WakeEnemyFormationManager(new int[] { 1, 1, 1, 1, 1 }, false);
+        }
+
+        if (removeEnemyTrigger)
+        {
+            removeEnemyTrigger = false;
+            RemoveEnemy(2);
+        }
+
+        if (testMoveEnemyTrigger)
+        {
+            testMoveEnemyTrigger = false;
+            UpdateDisplay();
+            MoveEnemy();
+        }
     }
 }
