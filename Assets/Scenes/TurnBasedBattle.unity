@@ -2087,7 +2087,13 @@ MonoBehaviour:
   - {fileID: 1864364009}
   - {fileID: 2021122831}
   - {fileID: 1332465145}
+  formationTypeNum: 0
   keepSomeOneMiddle: 0
+  testMoveEnemyTrigger: 0
+  testWakeFormationManagerTrigger: 0
+  removeEnemyTrigger: 0
+  printEnemyNumTrigger: 0
+  testKeepMiddleTrigger: 0
 --- !u!1 &213280042
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,11 +86,7 @@ public class EnemyFormationManager : MonoBehaviour
         else
         {
             Debug.LogError($"{removingEnemyNum}, 해당 적 번호의 적을 찾을 수 없습니다.");
-
-            for(int i =0; i < 5; i++)
-            {
-                Debug.LogError(enemyAssignStatus[1, i]);
-            }
+            Debug.LogError($"현재 적 번호들: {enemyAssignStatus[1, 0]}, {enemyAssignStatus[1, 1]}, {enemyAssignStatus[1, 2]}, {enemyAssignStatus[1, 3]}, {enemyAssignStatus[1, 4]}");
         }
 
         UpdateAssignInfo();
@@ -126,6 +123,8 @@ public class EnemyFormationManager : MonoBehaviour
             enemyToKeepMiddle = new int[2] { enemyAssignStatus[0, originLocation], middleEnemyNum };
             enemyAssignStatus[0, originLocation] = 0;
             enemyAssignStatus[1, originLocation] = 0;
+
+            UpdateAssignInfo();
         }
         else
         {
@@ -137,39 +136,34 @@ public class EnemyFormationManager : MonoBehaviour
     //할당 상태 업데이트
     public void UpdateAssignInfo()
     {
-        //TODO: RemoveEnemy로 적을 제거 한 뒤, 할당정보를 업데이트 하면 0이 맨 오른쪽으로 밀리지 않는 버그가 있음. 이것을 고칠것.
-
-        //할당 상태 배열에서 0을 모두 오른쪽으로 밀기
-        int left = 0;
-        int right = 4;
-
-        while (left < right)
+        //가운데 고정된 적을 0으로 일단 없에기
+        int midEnemyLocation = findEnemyLocation(enemyToKeepMiddle[1]);
+        if (midEnemyLocation != -1)
         {
-            // 왼쪽에서 타겟을 찾으면 오른쪽과 교환
-            if (enemyAssignStatus[1, left] == 0)
-            {
-                // 오른쪽으로 0 값을 이동
-                for (int i = left; i < right; i++)
-                {
-                    int[] temp = new int[2] { enemyAssignStatus[0, i], enemyAssignStatus[1, i] };
-                    enemyAssignStatus[0, i] = enemyAssignStatus[0, i + 1];
-                    enemyAssignStatus[1, i] = enemyAssignStatus[1, i + 1];
+            enemyAssignStatus[0, midEnemyLocation] = 0;
+            enemyAssignStatus[1, midEnemyLocation] = 0;
+        }
 
-                    enemyAssignStatus[0, i + 1] = temp[0];
-                    enemyAssignStatus[0, i + 1] = temp[1];
-                }
-                right--; // 배열의 오른쪽 끝에서 0이 위치하게 되었으므로, 오른쪽 인덱스를 줄임
-            }
-            else
+        //할당정보 배열의 적을 모두 오른쪽으로 밀기
+        int index = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            if (enemyAssignStatus[1, i] != 0)
             {
-                left++; // 0이 아닌 값은 그대로 두고 왼쪽 인덱스를 증가시킴
+                enemyAssignStatus[0, index] = enemyAssignStatus[0, i];
+                enemyAssignStatus[1, index++] = enemyAssignStatus[1, i];
             }
         }
 
+        // 남은 공간을 0으로 채움
+        while (index < 5)
+        {
+            enemyAssignStatus[0, index] = 0;
+            enemyAssignStatus[1, index++] = 0;
+        }
 
         //formationTypeNum 정하기
         formationTypeNum = enemyAmount - 1;
-
 
         //누군가 가운데 고정된 경우
         if (keepSomeOneMiddle)
@@ -182,6 +176,7 @@ public class EnemyFormationManager : MonoBehaviour
             }
 
             int middleLocation = formationTypeNum / 2;                      //가운데 위치 구하기
+            Debug.Log (middleLocation);
 
             //포메이션 뒤에서부터 가운데까지 하나씩 오른쪽으로 밀기.(가운데에 삽입될 적의 정보는 0으로 모두 오른쪽으로 밀렸기 때문에, 할당된것이 무엇인지 볼 필요는 없다.)
             for (int i = formationTypeNum; i > middleLocation; i--)
@@ -210,10 +205,7 @@ public class EnemyFormationManager : MonoBehaviour
                 //Show Enemy
                 enemyDisplayObject[i].SetActive(true);
             }
-
-
         }
-
     }
 
     void MoveEnemy()
@@ -277,6 +269,9 @@ public class EnemyFormationManager : MonoBehaviour
     public bool testWakeFormationManagerTrigger = false;
     public bool removeEnemyTrigger = false;
 
+    public bool printEnemyNumTrigger = false;
+    public bool testKeepMiddleTrigger = false;
+
     void Start()
     {
         //변수 초기화
@@ -301,6 +296,7 @@ public class EnemyFormationManager : MonoBehaviour
         {
             removeEnemyTrigger = false;
             RemoveEnemy(2);
+            //RemoveEnemy(4);
         }
 
         if (testMoveEnemyTrigger)
@@ -309,5 +305,18 @@ public class EnemyFormationManager : MonoBehaviour
             UpdateDisplay();
             MoveEnemy();
         }
+
+        if (printEnemyNumTrigger)
+        {
+            printEnemyNumTrigger = false;
+            Debug.Log($"현재 적 번호들: {enemyAssignStatus[1,0]}, {enemyAssignStatus[1, 1]}, {enemyAssignStatus[1, 2]}, {enemyAssignStatus[1, 3]}, {enemyAssignStatus[1, 4]}");
+        }
+
+        if (testKeepMiddleTrigger)
+        {
+            testKeepMiddleTrigger = false;
+            keepMiddle(5);
+        }
+
     }
 }
