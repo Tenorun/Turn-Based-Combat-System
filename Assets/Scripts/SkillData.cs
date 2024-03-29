@@ -192,15 +192,9 @@ public class SkillData : MonoBehaviour
         }
     }
 
-    //원격 아이템 검색
+    //원격 스킬 검색
     public void SetSearchSkill(int skillID)
     {
         skill = SkillDatabase.GetSkill(skillID);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -289,7 +289,7 @@ public class EnemyFormationManager : MonoBehaviour
         if (testWakeFormationManagerTrigger)
         {
             testWakeFormationManagerTrigger = false;
-            WakeEnemyFormationManager(new int[] { 1, 1, 1, 1, 1 }, false);
+            WakeEnemyFormationManager(new int[] { 1, 1, 1, 1, 2 }, false);
         }
 
         if (removeEnemyTrigger)
@@ -310,6 +310,7 @@ public class EnemyFormationManager : MonoBehaviour
         {
             printEnemyNumTrigger = false;
             Debug.Log($"현재 적 번호들: {enemyAssignStatus[1,0]}, {enemyAssignStatus[1, 1]}, {enemyAssignStatus[1, 2]}, {enemyAssignStatus[1, 3]}, {enemyAssignStatus[1, 4]}");
+            Debug.Log($"현재 적 ID들: {enemyAssignStatus[0, 0]}, {enemyAssignStatus[0, 1]}, {enemyAssignStatus[0, 2]}, {enemyAssignStatus[0, 3]}, {enemyAssignStatus[0, 4]}");
         }
 
         if (testKeepMiddleTrigger)
