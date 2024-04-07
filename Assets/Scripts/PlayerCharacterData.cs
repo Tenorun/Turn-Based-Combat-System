@@ -104,6 +104,7 @@ public class PlayerCharacterData : MonoBehaviour
         {
             this.CharacterId = characterId;
             this.CharacterName = characterName;
+
             this.MaxHp = maxHp;
             this.CurrentHp = maxHp;
             this.MaxSp = maxSp;
@@ -115,6 +116,7 @@ public class PlayerCharacterData : MonoBehaviour
             this.SpecialDefense = specialDefense;
             this.Speed = speed;
             this.Luck = luck;
+
             this.Inventory = new List<int>();
             this.Weapon = weapon;
             this.Armor = armor;
@@ -122,6 +124,7 @@ public class PlayerCharacterData : MonoBehaviour
             this.SkillSlot = skillSlot;
             this.Level = level;
             this.Experience = experience;
+
             this.GrowthPotential = growthPotential;
         }
     }

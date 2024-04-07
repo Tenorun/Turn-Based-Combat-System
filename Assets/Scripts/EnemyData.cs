@@ -38,6 +38,9 @@ public class EnemyData : MonoBehaviour
         // 적 고유번호
         public int EnemyId { get; set; }
 
+        //적 스프라이트 이미지 ID (이미지 id는 기본적으로 enemyId에 10을 곱한것이며, 다른 모습으로 바꿀때는 거기에)
+        public int[] enemySpriteImageId { get; set; }
+
         // 적 이름
         public string[] EnemyName { get; set; }
 
@@ -110,15 +113,35 @@ public class EnemyData : MonoBehaviour
         // 기타 스킬 팔레트
         public int[] EtcSkillPalette { get; set; }
 
+
+
+        //플레이어 보상
+
+        //보상 경험치
+        public int RewardExp;
+
+        //드랍 아이템
+        public int[] RewardItems { get; set; }
+
+        //아이템 드랍 확률
+        public float ItemDropPossibility { get; set; }
+
+        //아이템 드랍 비율
+        public int[] DropRatio { get; set; }
+
         // TODO: 적 스프라이트 데이터 구현
 
         // 생성자
-        public Enemy(int enemyId, string[] enemyName, int enemyType, int enemyAI, int maxHP, int defaultAP, int attack, int defense, int spAtk, int spDef, int speed, int luck)
+        public Enemy(int enemyId, string[] enemyName, int enemyType, int enemyAI, 
+            int maxHP, int defaultAP, int attack, int defense, int spAtk, int spDef, int speed, int luck, 
+            int[] atkPal, int[] defPal, int[] buffPal, int[] debuffPal, int[] effectPal, int[] etcPal,
+            int rewardExp, int[] rewardItems, float itemDropPossibility, int[] dropRatio)
         {
             this.EnemyId = enemyId;
             this.EnemyName = enemyName;
             this.EnemyType = enemyType;
             this.EnemyAI = enemyAI;
+
             this.MaxHP = maxHP;
             this.DefaultAP = defaultAP;
             this.Attack = attack;
@@ -127,6 +150,20 @@ public class EnemyData : MonoBehaviour
             this.SpecialDefense = spDef;
             this.Speed = speed;
             this.Luck = luck;
+
+            this.AtkPalette = atkPal;
+            this.DefPalette = defPal;
+            this.BuffPalette = buffPal;
+            this.DebuffPalette = debuffPal;
+            this.StatusEffectPalette = effectPal;
+            this.EtcSkillPalette = etcPal;
+
+            this.RewardExp = rewardExp;
+            this.RewardItems = rewardItems;
+            this.ItemDropPossibility = itemDropPossibility;
+            this.DropRatio = dropRatio;
+
+
             //TODO: 적 데이터 받기 마저 구현
         }
     }
