@@ -8,7 +8,7 @@ public class EnemyFormationManager : MonoBehaviour
 {
     public GameObject[] enemyDisplayObject = new GameObject[5];     //적 표시 오브젝트
 
-    readonly int[,] enemyFormations = new int[5, 5] { { 0, 400, 400, 400, 400 }, { -90, 90, 400, 400, 400 }, { -180, 0, 180, 400, 400 }, { -225, -75, 75, 225, 400 }, { -252, -126, 0, 126, 252 } };
+    readonly int[,] enemyFormations = new int[5, 5] { { 0, 450, 450, 450, 450 }, { -90, 90, 450, 450, 450 }, { -180, 0, 180, 450, 450 }, { -225, -75, 75, 225, 450 }, { -252, -126, 0, 126, 252 } };
     //적 배치 X 좌표
 
     public int[,] enemyAssignStatus = new int[2, 5];        //적 할당 상태
@@ -206,6 +206,8 @@ public class EnemyFormationManager : MonoBehaviour
                 enemyDisplayObject[i].SetActive(true);
             }
         }
+
+        //TODO: 파일에서 적 스프라이트 할당하는 코드 작성
     }
 
     void MoveEnemy()
