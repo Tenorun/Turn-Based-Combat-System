@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
     public Enemy enemy;
     // 아이템 데이터베이스 클래스
-    public class SkillDatabase
+    public class EnemyDatabase
     {
         // 아이템 목록
         public static List<Enemy> enemies = new List<Enemy>();
 
         // 아이템을 추가하는 함수
-        public static void AddSkill(Enemy enemy)
+        public static void AddEnemy(Enemy enemy)
         {
             enemies.Add(enemy);
         }
@@ -162,21 +163,71 @@ public class EnemyData : MonoBehaviour
             this.RewardItems = rewardItems;
             this.ItemDropPossibility = itemDropPossibility;
             this.DropRatio = dropRatio;
-
-
-            //TODO: 적 데이터 받기 마저 구현
         }
     }
 
-    // Start is called before the first frame update
+    public SpriteRenderer asdf;
+
     void Start()
     {
-        
+        LoadImages();
+
+        //테스트 코드
+        asdf.sprite = imageArray[20];
     }
 
-    //원격 적 검색
-    public void SetSearchSkill(int skillID)
+
+    //적 이미지
+    public string relativeFolderPath; // 상대 경로로 폴더 경로 지정
+    public Sprite[] imageArray; // 이미지를 저장할 배열
+
+    void LoadImages()
     {
-        enemy = SkillDatabase.GetEnemy(skillID);
+        string folderPath = Path.Combine(Application.dataPath, relativeFolderPath); // 상대 경로를 절대 경로로 변환
+
+        string[] files = Directory.GetFiles(folderPath, "*.png"); // 폴더 내의 모든 PNG 파일 가져오기
+
+        imageArray = new Sprite[(files.Length + 1) * 10]; // 이미지 배열 초기화
+
+        foreach (string file in files)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(file); // 파일 이름 (확장자 제외)
+
+            // 파일 이름에서 숫자 추출
+            string[] splitName = fileName.Split('-');
+            if (splitName.Length > 1)
+            {
+                int index;
+                if (int.TryParse(splitName[0], out index)) // 숫자로 변환
+                {
+                    // 이미지 로드
+                    Texture2D texture = LoadTextureFromFile(file);
+                    if (texture != null)
+                    {
+                        // Texture2D를 Sprite로 변환하면서 FilterMode를 None으로 설정
+                        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f, 100, 0, SpriteMeshType.FullRect, new Vector4(0, 0, texture.width, texture.height), false);
+                        sprite.texture.filterMode = FilterMode.Point; // FilterMode를 None으로 설정
+
+                        // 이미지 배열에 할당
+                        imageArray[index] = sprite;
+                    }
+                }
+            }
+        }
+    }
+
+    Texture2D LoadTextureFromFile(string filePath)
+    {
+        byte[] fileData = File.ReadAllBytes(filePath);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(fileData); // 파일 데이터로부터 텍스처 로드
+        return texture;
+    }
+
+
+    //원격 적 검색
+    public void SetSearchEnemy(int enemyID)
+    {
+        enemy = EnemyDatabase.GetEnemy(enemyID);
     }
 }
