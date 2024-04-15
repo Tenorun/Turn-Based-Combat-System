@@ -207,7 +207,7 @@ public class EnemyFormationManager : MonoBehaviour
             }
         }
 
-        //TODO: 파일에서 적 스프라이트 할당하는 코드 작성
+        //TODO: 적 스프라이트 할당
     }
 
     void MoveEnemy()
@@ -255,6 +255,12 @@ public class EnemyFormationManager : MonoBehaviour
         enemyTransform.position = targetPosition;
     }
 
+    //TODO: Implement EnemyStatusData
+
+
+
+
+
     int findEnemyLocation(int enemyNum)
     {
         for (int i = 0; i < 5; i++)
@@ -266,6 +272,12 @@ public class EnemyFormationManager : MonoBehaviour
         }
         return -1;
     }
+
+
+
+
+
+
 
     public bool testMoveEnemyTrigger = false;
     public bool testWakeFormationManagerTrigger = false;

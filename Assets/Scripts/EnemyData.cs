@@ -121,6 +121,9 @@ public class EnemyData : MonoBehaviour
         //보상 경험치
         public int RewardExp;
 
+        //보상 돈
+        public int RewardMoney;
+
         //드랍 아이템
         public int[] RewardItems { get; set; }
 
@@ -136,7 +139,7 @@ public class EnemyData : MonoBehaviour
         public Enemy(int enemyId, string[] enemyName, int enemyType, int enemyAI, 
             int maxHP, int defaultAP, int attack, int defense, int spAtk, int spDef, int speed, int luck, 
             int[] atkPal, int[] defPal, int[] buffPal, int[] debuffPal, int[] effectPal, int[] etcPal,
-            int rewardExp, int[] rewardItems, float itemDropPossibility, int[] dropRatio)
+            int rewardExp, int rewardMoney, int[] rewardItems, float itemDropPossibility, int[] dropRatio)
         {
             this.EnemyId = enemyId;
             this.EnemyName = enemyName;
@@ -160,6 +163,7 @@ public class EnemyData : MonoBehaviour
             this.EtcSkillPalette = etcPal;
 
             this.RewardExp = rewardExp;
+            this.RewardMoney = rewardMoney;
             this.RewardItems = rewardItems;
             this.ItemDropPossibility = itemDropPossibility;
             this.DropRatio = dropRatio;
@@ -170,6 +174,7 @@ public class EnemyData : MonoBehaviour
 
     void Start()
     {
+        //파일에서 적 이미지 추출
         LoadImages();
 
         //테스트 코드
