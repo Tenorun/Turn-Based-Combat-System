@@ -6,24 +6,24 @@ using UnityEngine;
 public class EnemyData : MonoBehaviour
 {
     public Enemy enemy;
-    // 아이템 데이터베이스 클래스
+    // 적 데이터베이스 클래스
     public class EnemyDatabase
     {
-        // 아이템 목록
+        // 적 목록
         public static List<Enemy> enemies = new List<Enemy>();
 
-        // 아이템을 추가하는 함수
+        // 적을 추가하는 함수
         public static void AddEnemy(Enemy enemy)
         {
             enemies.Add(enemy);
         }
 
-        // 아이템을 가져오는 함수
+        // 적을 가져오는 함수
         public static Enemy GetEnemy(int enemyId)
         {
             foreach (Enemy enemy in enemies)
             {
-                if (enemy.EnemyId == enemyId)
+                if (enemy.EnemyID == enemyId)
                 {
                     return enemy;
                 }
@@ -33,14 +33,11 @@ public class EnemyData : MonoBehaviour
         }
     }
 
-    // 스킬 클래스
+    // 적 클래스
     public class Enemy
     {
         // 적 고유번호
-        public int EnemyId { get; set; }
-
-        //적 스프라이트 이미지 ID (이미지 id는 기본적으로 enemyId에 10을 곱한것이며, 다른 모습으로 바꿀때는 거기에)
-        public int[] enemySpriteImageId { get; set; }
+        public int EnemyID { get; set; }
 
         // 적 이름
         public string[] EnemyName { get; set; }
@@ -71,7 +68,7 @@ public class EnemyData : MonoBehaviour
         public int MaxHP { get; set; }
 
         // 기본 AP 값
-        public int DefaultAP { get; set; }
+        public int BaseAP { get; set; }
 
         // 공격력
         public int Attack { get; set; }
@@ -137,17 +134,17 @@ public class EnemyData : MonoBehaviour
 
         // 생성자
         public Enemy(int enemyId, string[] enemyName, int enemyType, int enemyAI, 
-            int maxHP, int defaultAP, int attack, int defense, int spAtk, int spDef, int speed, int luck, 
+            int maxHP, int baseAP, int attack, int defense, int spAtk, int spDef, int speed, int luck, 
             int[] atkPal, int[] defPal, int[] buffPal, int[] debuffPal, int[] effectPal, int[] etcPal,
             int rewardExp, int rewardMoney, int[] rewardItems, float itemDropPossibility, int[] dropRatio)
         {
-            this.EnemyId = enemyId;
+            this.EnemyID = enemyId;
             this.EnemyName = enemyName;
             this.EnemyType = enemyType;
             this.EnemyAI = enemyAI;
 
             this.MaxHP = maxHP;
-            this.DefaultAP = defaultAP;
+            this.BaseAP = baseAP;
             this.Attack = attack;
             this.Defense = defense;
             this.SpecialAttack = spAtk;
