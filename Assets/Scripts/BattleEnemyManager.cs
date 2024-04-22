@@ -20,7 +20,7 @@ public class BattleEnemyManager : MonoBehaviour
     //적 데이터 베이스
     public GameObject enemyDB;
 
-    public AssignEnemy enemy;
+    public AssignEnemy enemyStatus;
 
     // 할당된 적 상태 클래스
     public class AssignedEnemyStatus
@@ -41,11 +41,11 @@ public class BattleEnemyManager : MonoBehaviour
         }
 
         // 할당 된 적의 값을 가져오는 함수
-        public static AssignEnemy GetAssignedEnemy(int enemyId)
+        public static AssignEnemy GetAssignedEnemy(int assignNum)
         {
             foreach (AssignEnemy assignedEnemy in AssignedEnemies)
             {
-                if (assignedEnemy.EnemyID == enemyId)
+                if (assignedEnemy.AssignNum == assignNum)
                 {
                     return assignedEnemy;
                 }
@@ -216,7 +216,7 @@ public class BattleEnemyManager : MonoBehaviour
 
         if (emptyPlaceLocation != -1) //빈자리가 있음
         {
-            //할당 상태의 빈자리에 적 ID를 추가하기
+            //할당 상태의 빈자리에 적 할당 번호를 추가하기
             assignedEnemies[emptyPlaceLocation] = nextAssignNum;
 
             //추가 하려는 적의 정보 검색
@@ -269,9 +269,9 @@ public class BattleEnemyManager : MonoBehaviour
     }
 
     //원격 적 검색
-    public void SetSearchEnemy(int enemyID)
+    public void SetSearchEnemyAssign(int targetAssignNum)
     {
-        enemy = AssignedEnemyStatus.GetAssignedEnemy(enemyID);
+        enemyStatus = AssignedEnemyStatus.GetAssignedEnemy(targetAssignNum);
     }
 
     //
@@ -297,8 +297,10 @@ public class BattleEnemyManager : MonoBehaviour
                                                    //추가 설명: 누군가를 가운데 배열 하면 formationType는 누군가를 가운데 배치 할 수 있는 홀수가 되며, 그 가운데는 무조건 가운데에 배열하기로 한 적으로 배열된다.
 
     //적 표시기 이미지 업데이트
+
     void UpdateDisplayerImage()
     {
+
         for (int i = 0; i < enemyDisplayObject.Length; i++)
         {
             if (assignedEnemies[i] == 0)
@@ -310,10 +312,22 @@ public class BattleEnemyManager : MonoBehaviour
             {
                 //Show Enemy
                 enemyDisplayObject[i].SetActive(true);
+
+                //i번째 적 표시기의 스프라이트 렌더러
+                SpriteRenderer enemyDisplaySpriteRenderer = enemyDisplayObject[i].GetComponent<SpriteRenderer>();
+
+                //i번째 적의 스프라이트 ID
+                SetSearchEnemyAssign(assignedEnemies[i]);
+                int targetSpriteID = enemyStatus.EnemySpriteImageID;
+
+                //i번째 적의 스프라이트 이미지
+                Sprite targetSpriteData = enemyDB.GetComponent<EnemyData>().imageArray[targetSpriteID];
+
+                //적표시기 스프라이트 변경
+                enemyDisplaySpriteRenderer.sprite = targetSpriteData;
+
             }
         }
-
-        //TODO: 적표시기에 적 스프라이트 할당
     }
 
     //TODO: 적 표시기 움직임 구현

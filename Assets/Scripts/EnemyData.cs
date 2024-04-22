@@ -167,15 +167,10 @@ public class EnemyData : MonoBehaviour
         }
     }
 
-    public SpriteRenderer asdf;
-
     void Start()
     {
         //파일에서 적 이미지 추출
         LoadImages();
-
-        //테스트 코드
-        asdf.sprite = imageArray[20];
     }
 
 
