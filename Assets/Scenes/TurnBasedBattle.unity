@@ -2042,6 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211067256}
   - component: {fileID: 211067257}
+  - component: {fileID: 211067258}
   m_Layer: 0
   m_Name: Enemy Display
   m_TagString: Untagged
@@ -2076,7 +2077,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211067255}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70904559f8890034fa9378a204d688d3, type: 3}
   m_Name: 
@@ -2094,6 +2095,28 @@ MonoBehaviour:
   removeEnemyTrigger: 0
   printEnemyNumTrigger: 0
   testKeepMiddleTrigger: 0
+--- !u!114 &211067258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211067255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0108115c86168494780fc91085de8e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedEnemies: 0000000000000000000000000000000000000000
+  enemyDB: {fileID: 595465951}
+  keepSomeOneMiddle: 0
+  enemyDisplayObject:
+  - {fileID: 911620252}
+  - {fileID: 1023663}
+  - {fileID: 1864364009}
+  - {fileID: 2021122831}
+  - {fileID: 1332465145}
+  formationTypeNum: 0
 --- !u!1 &213280042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3509,7 +3532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af1da4f897387c4faac8d9b1f7165cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asdf: {fileID: 978819133}
   relativeFolderPath: Images/Character/Battle/EnemySprite
   imageArray: []
 --- !u!4 &595465953

@@ -149,7 +149,14 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
+    public bool keepSomeOneMiddle;                 //누군가를 가운데에 고정할지 여부 
+    int enemyToKeepMiddle;                         //가운데에 고정할 적의 전투 번호 (예시: 보스) *0: 없음
+                                                   //추가 설명: 누군가를 가운데 배열 하면 formationType는 누군가를 가운데 배치 할 수 있는 홀수가 되며, 그 가운데는 무조건 가운데에 배열하기로 한 적으로 배열된다.
+
+    //
     //할당 적 정보 업데이트
+    //
+
     public void UpdateAssignInfo()
     {
         //적 개수 세기
@@ -206,6 +213,12 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
+    //적을 가운데 고정하기
+    public void AssignMiddleEnemy(int targetPosition)
+    {
+        keepSomeOneMiddle = true;
+        enemyToKeepMiddle = assignedEnemies[targetPosition];
+    }
 
     //전투 적 할당 호출 함수
     public void AddEnemyAssign(int enemyID)
@@ -236,7 +249,8 @@ public class BattleEnemyManager : MonoBehaviour
             Debug.LogError("적을 더이상 추가 할 수 없습니다.");
         }
 
-        UpdateAssignInfo();
+        //적 표시기 업데이트
+        UpdateDisplayerCodeSet();
     }
 
     //할당 적 제거 함수
@@ -257,7 +271,8 @@ public class BattleEnemyManager : MonoBehaviour
             }
         }
 
-        UpdateAssignInfo();
+        //적 표시기 업데이트
+        UpdateDisplayerCodeSet();
     }
 
     //할당 적 초기화 호출 함수
@@ -292,13 +307,9 @@ public class BattleEnemyManager : MonoBehaviour
      5: 5개 장소 배열 ■ ■ ■ ■ ■
      */
 
-    public bool keepSomeOneMiddle;                 //누군가를 가운데에 고정할지 여부 
-    int enemyToKeepMiddle;                         //가운데에 고정할 적의 전투 번호 (예시: 보스) *0: 없음
-                                                   //추가 설명: 누군가를 가운데 배열 하면 formationType는 누군가를 가운데 배치 할 수 있는 홀수가 되며, 그 가운데는 무조건 가운데에 배열하기로 한 적으로 배열된다.
 
     //적 표시기 이미지 업데이트
-
-    void UpdateDisplayerImage()
+    public void UpdateDisplayerImage()
     {
 
         for (int i = 0; i < enemyDisplayObject.Length; i++)
@@ -330,8 +341,61 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
-    //TODO: 적 표시기 움직임 구현
+    public void MoveEnemyToItsPlace()
+    {
+        // Ensure that the enemy formation type number is within bounds
+        if (formationTypeNum < 0 || formationTypeNum >= enemyFormations.GetLength(0))
+        {
+            Debug.LogError("Invalid formation type number.");
+            return;
+        }
 
+        // Move each enemy display object to its designated position
+        for (int i = 0; i < enemyDisplayObject.Length; i++)
+        {
+            // Get the target position from the enemyFormations array
+            Vector3 targetPosition = new Vector3(enemyFormations[formationTypeNum, i], 0f, 0f); // Assuming Y and Z positions are 0
+
+            // Start coroutine for smooth movement
+            StartCoroutine(MoveEnemyCoroutine(enemyDisplayObject[i].transform, targetPosition));
+        }
+    }
+
+    // Coroutine for smooth movement of enemy display object
+    IEnumerator MoveEnemyCoroutine(Transform enemyTransform, Vector3 targetPosition)
+    {
+        const float MOVING_SPEED = 0.2f;
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = enemyTransform.position;
+
+        // Move towards the target position over time
+        while (elapsedTime < MOVING_SPEED) // Moving in `MOVING_SPEED` seconds
+        {
+            // Calculate the interpolation ratio
+            float t = elapsedTime / MOVING_SPEED; // `MOVING_SPEED` seconds duration
+
+            // Smoothly move towards the target position using Lerp
+            enemyTransform.position = Vector3.Lerp(startingPosition, targetPosition, t);
+
+            // Increment elapsed time
+            elapsedTime += Time.deltaTime;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure final position is precisely the target position
+        enemyTransform.position = targetPosition;
+    }
+
+
+    //적 할당값, 디스플레이 이미지 업데이트, 적 움직임 코드셋
+    public void UpdateDisplayerCodeSet()
+    {
+        UpdateAssignInfo();
+        MoveEnemyToItsPlace();
+        UpdateDisplayerImage();
+    }
 
     //TODO: 적 선택 구현
 
@@ -347,11 +411,17 @@ public class BattleEnemyManager : MonoBehaviour
         enemyAmount = 0;
         formationTypeNum = 0;
 
-        for(int i=0; i<5; i++)
+        for(int i=0; i < enemyIDs.Length; i++)
         {
             AddEnemyAssign(enemyIDs[i]);
         }
 
+        if (keepFirstEnemyMiddle)
+        {
+            AssignMiddleEnemy(0);
+        }
+
+        UpdateDisplayerCodeSet();
     }
 
     int findEnemyLocation(int enemyNum)
@@ -369,5 +439,37 @@ public class BattleEnemyManager : MonoBehaviour
     void Start()
     {
         nextAssignNum = 1;
-    } 
+        ResetEnemyAssign();
+    }
+
+    public bool TEST_TRIGGER_wakeup = false;
+    public bool TEST_TRIGGER_add1 = false;
+    public bool TEST_TRIGGER_add2 = false;
+    public bool TEST_TRIGGER_remove = false;
+
+    private void Update()
+    {
+        if (TEST_TRIGGER_wakeup)
+        {
+            TEST_TRIGGER_wakeup = false;
+            WakeEnemyManager(new int[] {1, 2 }, false);
+        }
+        if (TEST_TRIGGER_add1)
+        {
+            TEST_TRIGGER_add1 = false;
+            AddEnemyAssign(1);
+        }
+        if (TEST_TRIGGER_add2)
+        {
+            TEST_TRIGGER_add2 = false;
+            AddEnemyAssign(2);
+        }
+        if (TEST_TRIGGER_remove)
+        {
+            TEST_TRIGGER_remove = false;
+            RemoveEnemyAssign(assignedEnemies[0]);
+        }
+    }
+
+    //TODO: 제거할때 이미지가 우선적으로 바뀌어 서로 다른 적이 옆에 있을때 어색하게 없어지는것을 고치기
 }
