@@ -2041,7 +2041,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211067256}
-  - component: {fileID: 211067257}
   - component: {fileID: 211067258}
   m_Layer: 0
   m_Name: Enemy Display
@@ -2070,31 +2069,6 @@ Transform:
   - {fileID: 1332465146}
   m_Father: {fileID: 704444434}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &211067257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211067255}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70904559f8890034fa9378a204d688d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyDisplayObject:
-  - {fileID: 911620252}
-  - {fileID: 1023663}
-  - {fileID: 1864364009}
-  - {fileID: 2021122831}
-  - {fileID: 1332465145}
-  formationTypeNum: 0
-  keepSomeOneMiddle: 0
-  testMoveEnemyTrigger: 0
-  testWakeFormationManagerTrigger: 0
-  removeEnemyTrigger: 0
-  printEnemyNumTrigger: 0
-  testKeepMiddleTrigger: 0
 --- !u!114 &211067258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2117,6 +2091,10 @@ MonoBehaviour:
   - {fileID: 2021122831}
   - {fileID: 1332465145}
   formationTypeNum: 0
+  TEST_TRIGGER_wakeup: 0
+  TEST_TRIGGER_add1: 0
+  TEST_TRIGGER_add2: 0
+  TEST_TRIGGER_remove: 0
 --- !u!1 &213280042
 GameObject:
   m_ObjectHideFlags: 0

@@ -159,6 +159,7 @@ public class BattleEnemyManager : MonoBehaviour
 
     public void UpdateAssignInfo()
     {
+
         //적 개수 세기
         enemyAmount = 0;
         for(int i = 0; i < 5; i++)
@@ -166,51 +167,8 @@ public class BattleEnemyManager : MonoBehaviour
             if (assignedEnemies[i] != 0) enemyAmount++;
         }
 
-        //고정된 적을 0으로 없에기
-        int fixedEnemyLocation = findEnemyLocation(enemyToKeepMiddle);
-        if(fixedEnemyLocation != -1)
-        {
-            assignedEnemies[fixedEnemyLocation] = 0;
-        }
-
-        //할당정보 배열의 0을 모두 왼쪽으로
-        int index = 0;
-        for(int i = 0; i < 5; i++)
-        {
-            if (assignedEnemies[i] != 0)
-            {
-                assignedEnemies[index++] = assignedEnemies[i];
-            }
-        }
-        //남은 공간을 모두 0으로
-        while (index < 5)
-        {
-            assignedEnemies[index++] = 0;
-        }
-
-        //formationTypeNum 정하기
-        formationTypeNum = enemyAmount - 1;
-
         //누가 가운데 고정된 경우
-        if (keepSomeOneMiddle)
-        {
-            //적 개수가 짝수일때, 포메이션 타입을 홀수로 하기.
-            //예) 2명: 포메이션 타입 = 2(3명 배열)/4명: 포메이션 타입 = 4(5명 배열)
-            if (enemyAmount % 2 == 0)
-            {
-                formationTypeNum = enemyAmount;
-            }
-
-            int middleLocation = formationTypeNum / 2;
-
-            //뒤에서부터 가운데까지 하나씩 오른쪽으로 밀기.(가운데에 삽입될 적의 정보는 0으로 모두 오른쪽으로 밀렸기 때문에, 할당된것이 무엇인지 볼 필요는 없다.)
-            for (int i = formationTypeNum; i > middleLocation; i--)
-            {
-                assignedEnemies[i] = assignedEnemies[i - 1];
-            }
-            //가운데에 고정할 적을 삽입
-            assignedEnemies[middleLocation] = enemyToKeepMiddle;
-        }
+        //TODO: 누가 가운데 고정된 경우의 고정된 적이 포메이션 정보 중앙에 오도록 하는 코드를 작성
     }
 
     //적을 가운데 고정하기
@@ -240,6 +198,11 @@ public class BattleEnemyManager : MonoBehaviour
                 new AssignEnemy(nextAssignNum, enemyID,
                 enemyDB.GetComponent<EnemyData>().enemy.MaxHP,
                 enemyDB.GetComponent<EnemyData>().enemy.BaseAP));
+            
+            if(formationTypeNum < 4)
+            {
+                ++formationTypeNum;
+            } 
 
             //적 할당 번호 1 진행
             ++nextAssignNum;
@@ -278,6 +241,8 @@ public class BattleEnemyManager : MonoBehaviour
     //할당 적 초기화 호출 함수
     public void ResetEnemyAssign()
     {
+        formationTypeNum = -1;
+        enemyAmount = 0;
         nextAssignNum = 1;
         assignedEnemies = new int[5] { 0, 0, 0, 0, 0 };
         AssignedEnemyStatus.ResetEnemyAssignment();
@@ -298,13 +263,13 @@ public class BattleEnemyManager : MonoBehaviour
     readonly int[,] enemyFormations = new int[5, 5] { { 0, 450, 450, 450, 450 }, { -90, 90, 450, 450, 450 }, { -180, 0, 180, 450, 450 }, { -225, -75, 75, 225, 450 }, { -252, -126, 0, 126, 252 } };
     //적 배치 X 좌표
 
-    public int formationTypeNum;                                   //대열 형식
+    public int formationTypeNum = -1;                                   //대열 형식
     /*대열 형식
-     1: 1개 장소 배열     ■
-     2: 2개 장소 배열    ■ ■
-     3: 3개 장소 배열   ■ ■ ■
-     4: 4개 장소 배열  ■ ■ ■ ■
-     5: 5개 장소 배열 ■ ■ ■ ■ ■
+     0: 1개 장소 배열     ■
+     1: 2개 장소 배열    ■ ■
+     2: 3개 장소 배열   ■ ■ ■
+     3: 4개 장소 배열  ■ ■ ■ ■
+     4: 5개 장소 배열 ■ ■ ■ ■ ■
      */
 
 
@@ -356,38 +321,11 @@ public class BattleEnemyManager : MonoBehaviour
             // Get the target position from the enemyFormations array
             Vector3 targetPosition = new Vector3(enemyFormations[formationTypeNum, i], 0f, 0f); // Assuming Y and Z positions are 0
 
+            enemyDisplayObject[i].transform.position = targetPosition;
             // Start coroutine for smooth movement
-            StartCoroutine(MoveEnemyCoroutine(enemyDisplayObject[i].transform, targetPosition));
+            //StartCoroutine(MoveEnemyCoroutine(enemyDisplayObject[i].transform, targetPosition));
         }
     }
-
-    // Coroutine for smooth movement of enemy display object
-    IEnumerator MoveEnemyCoroutine(Transform enemyTransform, Vector3 targetPosition)
-    {
-        const float MOVING_SPEED = 0.2f;
-
-        float elapsedTime = 0f;
-        Vector3 startingPosition = enemyTransform.position;
-
-        // Move towards the target position over time
-        while (elapsedTime < MOVING_SPEED) // Moving in `MOVING_SPEED` seconds
-        {
-            // Calculate the interpolation ratio
-            float t = elapsedTime / MOVING_SPEED; // `MOVING_SPEED` seconds duration
-
-            // Smoothly move towards the target position using Lerp
-            enemyTransform.position = Vector3.Lerp(startingPosition, targetPosition, t);
-
-            // Increment elapsed time
-            elapsedTime += Time.deltaTime;
-
-            yield return null; // Wait for the next frame
-        }
-
-        // Ensure final position is precisely the target position
-        enemyTransform.position = targetPosition;
-    }
-
 
     //적 할당값, 디스플레이 이미지 업데이트, 적 움직임 코드셋
     public void UpdateDisplayerCodeSet()
@@ -409,9 +347,9 @@ public class BattleEnemyManager : MonoBehaviour
         keepSomeOneMiddle = false;
         enemyToKeepMiddle = 0;
         enemyAmount = 0;
-        formationTypeNum = 0;
+        formationTypeNum = -1;
 
-        for(int i=0; i < enemyIDs.Length; i++)
+        for(int i = 0; i < enemyIDs.Length; i++)
         {
             AddEnemyAssign(enemyIDs[i]);
         }
@@ -445,6 +383,9 @@ public class BattleEnemyManager : MonoBehaviour
     public bool TEST_TRIGGER_wakeup = false;
     public bool TEST_TRIGGER_add1 = false;
     public bool TEST_TRIGGER_add2 = false;
+
+
+    public int TEST_removeTargetPosition = 0;
     public bool TEST_TRIGGER_remove = false;
 
     private void Update()
@@ -452,7 +393,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (TEST_TRIGGER_wakeup)
         {
             TEST_TRIGGER_wakeup = false;
-            WakeEnemyManager(new int[] {1, 2 }, false);
+            WakeEnemyManager(new int[] {2, 1 }, true);
         }
         if (TEST_TRIGGER_add1)
         {
@@ -467,7 +408,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (TEST_TRIGGER_remove)
         {
             TEST_TRIGGER_remove = false;
-            RemoveEnemyAssign(assignedEnemies[0]);
+            RemoveEnemyAssign(assignedEnemies[TEST_removeTargetPosition]);
         }
     }
 
