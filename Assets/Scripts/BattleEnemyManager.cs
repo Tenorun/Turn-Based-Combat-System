@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BattleEnemyManager : MonoBehaviour
@@ -149,7 +150,7 @@ public class BattleEnemyManager : MonoBehaviour
         }
     }
 
-    public bool keepSomeOneMiddle;                 //누군가를 가운데에 고정할지 여부 
+    public bool keepEnemyMiddle;                 //누군가를 가운데에 고정할지 여부 
     int enemyToKeepMiddle;                         //가운데에 고정할 적의 전투 번호 (예시: 보스) *0: 없음
                                                    //추가 설명: 누군가를 가운데 배열 하면 formationType는 누군가를 가운데 배치 할 수 있는 홀수가 되며, 그 가운데는 무조건 가운데에 배열하기로 한 적으로 배열된다.
 
@@ -169,13 +170,38 @@ public class BattleEnemyManager : MonoBehaviour
 
         //누가 가운데 고정된 경우
         //TODO: 누가 가운데 고정된 경우의 고정된 적이 포메이션 정보 중앙에 오도록 하는 코드를 작성
-    }
 
-    //적을 가운데 고정하기
-    public void AssignMiddleEnemy(int targetPosition)
-    {
-        keepSomeOneMiddle = true;
-        enemyToKeepMiddle = assignedEnemies[targetPosition];
+        //가운데 고정이 되어 있으며, 그 고정된 적이 정위치에 있지 않을 때
+        if (keepEnemyMiddle && assignedEnemies[2] != enemyToKeepMiddle)
+        {
+
+            //현재 가운데 고정 적 제외 적들
+            int[] nonMidEnemies = new int[4] { 0, 0, 0, 0 };
+
+            int nonMidEnemyAmount = 0;
+            
+
+            for(int i = 0; i < 5; i++)
+            {
+                if (assignedEnemies[i] != 0 && assignedEnemies[i] != enemyToKeepMiddle)
+                {
+                    nonMidEnemies[nonMidEnemyAmount++] = assignedEnemies[i];
+                }
+            }
+
+            //할당 적 데이터 초기화
+            assignedEnemies = new int[5] { 0, 0, 0, 0, 0 };
+
+            //가운데 고정할 적 할당
+            assignedEnemies[2] = enemyToKeepMiddle;
+
+            //nonMidEnemies들을 먼저 넣은 요소부터 1,3,0,4번 자리순서로 배정한다. 
+            if (nonMidEnemyAmount >= 1) assignedEnemies[1] = nonMidEnemies[0];
+            if (nonMidEnemyAmount >= 2) assignedEnemies[3] = nonMidEnemies[1];
+            if (nonMidEnemyAmount >= 3) assignedEnemies[0] = nonMidEnemies[2];
+            if (nonMidEnemyAmount >= 4) assignedEnemies[4] = nonMidEnemies[3];
+
+        }
     }
 
     //전투 적 할당 호출 함수
@@ -183,29 +209,54 @@ public class BattleEnemyManager : MonoBehaviour
     {
 
         //첫 빈자리 위치 번호 구하기
-        int emptyPlaceLocation = findEnemyLocation(0);
+        int targetPlaceLocation = findEnemyLocation(0);
 
-        if (emptyPlaceLocation != -1) //빈자리가 있음
+        if (targetPlaceLocation != -1) //빈자리가 있음
         {
-            //할당 상태의 빈자리에 적 할당 번호를 추가하기
-            assignedEnemies[emptyPlaceLocation] = nextAssignNum;
+
+            //가운데 고정된 적이 있다면 1,3,0,4 우선 순위로 자리 추가하기.
+            if (keepEnemyMiddle)
+            {
+                bool isGotPlaceLocation = false;
+                if (!isGotPlaceLocation && assignedEnemies[1] == 0)
+                {
+                    targetPlaceLocation = 1;
+                    isGotPlaceLocation = true;
+                }
+                if (!isGotPlaceLocation && assignedEnemies[3] == 0)
+                {
+                    targetPlaceLocation = 3;
+                    isGotPlaceLocation = true;
+                }
+                if (!isGotPlaceLocation && assignedEnemies[0] == 0)
+                {
+                    targetPlaceLocation = 0;
+                    isGotPlaceLocation = true;
+                }
+                if (!isGotPlaceLocation && assignedEnemies[4] == 0)
+                {
+                    targetPlaceLocation = 4;
+                    isGotPlaceLocation = true;
+                }
+            }
+
+            //적 할당 배열에 적 할당 번호 정보 추가
+            assignedEnemies[targetPlaceLocation] = nextAssignNum;
 
             //추가 하려는 적의 정보 검색
             enemyDB.GetComponent<EnemyData>().SetSearchEnemy(enemyID);
 
             //할당 적 상태 추가하기
             AssignedEnemyStatus.AddEnemyAssignment(
-                new AssignEnemy(nextAssignNum, enemyID,
+                new AssignEnemy(nextAssignNum++, enemyID,
                 enemyDB.GetComponent<EnemyData>().enemy.MaxHP,
                 enemyDB.GetComponent<EnemyData>().enemy.BaseAP));
             
-            if(formationTypeNum < 4)
+            //대열 형식 번호가 4보다 작고, 현재 대열 형식에서 가능한 적 개수를 초과 할 때 대열 형식 수정
+            if(formationTypeNum < 4 && formationTypeNum <= enemyAmount - 1)
             {
                 ++formationTypeNum;
             } 
-
-            //적 할당 번호 1 진행
-            ++nextAssignNum;
         }
         else //빈자리가 없음
         {
@@ -230,7 +281,7 @@ public class BattleEnemyManager : MonoBehaviour
             if(targetAssignNum == enemyToKeepMiddle)
             {
                 enemyToKeepMiddle = 0;
-                keepSomeOneMiddle = false;
+                keepEnemyMiddle = false;
             }
         }
 
@@ -322,8 +373,6 @@ public class BattleEnemyManager : MonoBehaviour
             Vector3 targetPosition = new Vector3(enemyFormations[formationTypeNum, i], 0f, 0f); // Assuming Y and Z positions are 0
 
             enemyDisplayObject[i].transform.position = targetPosition;
-            // Start coroutine for smooth movement
-            //StartCoroutine(MoveEnemyCoroutine(enemyDisplayObject[i].transform, targetPosition));
         }
     }
 
@@ -335,7 +384,6 @@ public class BattleEnemyManager : MonoBehaviour
         UpdateDisplayerImage();
     }
 
-    //TODO: 적 선택 구현
 
     //
     //<그 외>
@@ -344,7 +392,7 @@ public class BattleEnemyManager : MonoBehaviour
     public void WakeEnemyManager(int[] enemyIDs, bool keepFirstEnemyMiddle)
     {
         ResetEnemyAssign();
-        keepSomeOneMiddle = false;
+        keepEnemyMiddle = false;
         enemyToKeepMiddle = 0;
         enemyAmount = 0;
         formationTypeNum = -1;
@@ -356,7 +404,9 @@ public class BattleEnemyManager : MonoBehaviour
 
         if (keepFirstEnemyMiddle)
         {
-            AssignMiddleEnemy(0);
+            keepEnemyMiddle = true;
+            enemyToKeepMiddle = assignedEnemies[0];
+            formationTypeNum = 4;
         }
 
         UpdateDisplayerCodeSet();
@@ -393,7 +443,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (TEST_TRIGGER_wakeup)
         {
             TEST_TRIGGER_wakeup = false;
-            WakeEnemyManager(new int[] {2, 1 }, true);
+            WakeEnemyManager(new int[] {1}, false);
         }
         if (TEST_TRIGGER_add1)
         {
@@ -411,6 +461,4 @@ public class BattleEnemyManager : MonoBehaviour
             RemoveEnemyAssign(assignedEnemies[TEST_removeTargetPosition]);
         }
     }
-
-    //TODO: 제거할때 이미지가 우선적으로 바뀌어 서로 다른 적이 옆에 있을때 어색하게 없어지는것을 고치기
 }
