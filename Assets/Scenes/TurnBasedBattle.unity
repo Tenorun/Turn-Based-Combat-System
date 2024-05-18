@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assignedEnemies: 0000000000000000000000000000000000000000
   enemyDB: {fileID: 595465951}
-  keepSomeOneMiddle: 0
+  keepEnemyMiddle: 0
   enemyDisplayObject:
   - {fileID: 911620252}
   - {fileID: 1023663}
@@ -2094,6 +2094,7 @@ MonoBehaviour:
   TEST_TRIGGER_wakeup: 0
   TEST_TRIGGER_add1: 0
   TEST_TRIGGER_add2: 0
+  TEST_removeTargetPosition: 0
   TEST_TRIGGER_remove: 0
 --- !u!1 &213280042
 GameObject:
