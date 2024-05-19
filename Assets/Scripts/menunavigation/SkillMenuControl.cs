@@ -193,6 +193,10 @@ public class SkillMenuControl : MonoBehaviour
             //Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 1);
 
             skillDatabase.GetComponent<SkillData>().UseSkillEffect(skillID);        //디버그용
+
+            //닫기
+            Menu.GetComponent<MenuNavigator>().ShrinkMenuToMain();
+            this.gameObject.SetActive(false);
         }
     }
 

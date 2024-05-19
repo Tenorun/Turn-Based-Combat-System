@@ -244,6 +244,10 @@ public class ItemMenuControl : MonoBehaviour
 
             //Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
             ItemDB.GetComponent<ItemData>().UseItemEffect(pointingItemID);   //디버그용
+
+            //닫기
+            Menu.GetComponent<MenuNavigator>().ShrinkMenuToMain();
+            this.gameObject.SetActive(false);
         }
     }
 

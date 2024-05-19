@@ -199,6 +199,13 @@ public class MenuNavigator : MonoBehaviour
         uiRectTransform.offsetMax = new Vector2(-159, _minTopValue_);
     }
 
+    public void ShrinkMenuToMain()
+    {
+        curMenuMod = MenuOptions.Locked;
+        curTargetMenu = MenuOptions.Main;
+        changeSizeTrigger = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -246,9 +253,7 @@ public class MenuNavigator : MonoBehaviour
             case MenuOptions.Attack:
                 if (Input.GetButtonDown("Cancel"))
                 {
-                    curMenuMod = MenuOptions.Locked;
-                    curTargetMenu = MenuOptions.Main;
-                    changeSizeTrigger = true;
+                    ShrinkMenuToMain();
                 }
                 break;
             //스킬 메뉴
@@ -258,10 +263,8 @@ public class MenuNavigator : MonoBehaviour
 
                 if (Input.GetButtonDown("Cancel"))
                 {
-                    curMenuMod = MenuOptions.Locked;
-                    curTargetMenu = MenuOptions.Main;
+                    ShrinkMenuToMain();
                     SkillMenuFrame.SetActive(false);
-                    changeSizeTrigger = true;
                 }
                 break;
             //아이템 메뉴
@@ -271,19 +274,15 @@ public class MenuNavigator : MonoBehaviour
 
                 if (Input.GetButtonDown("Cancel"))
                 {
-                    curMenuMod = MenuOptions.Locked;
-                    curTargetMenu = MenuOptions.Main;
+                    ShrinkMenuToMain();
                     ItemMenuFrame.SetActive(false);
-                    changeSizeTrigger = true;
                 }
                 break;
             //기타 메뉴
             case MenuOptions.Etc:
                 if (Input.GetButtonDown("Cancel"))
                 {
-                    curMenuMod = MenuOptions.Locked;
-                    curTargetMenu = MenuOptions.Main;
-                    changeSizeTrigger = true;
+                    ShrinkMenuToMain();
                 }
                 break;
             case MenuOptions.Locked:
