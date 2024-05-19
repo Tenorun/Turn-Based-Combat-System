@@ -190,7 +190,7 @@ public class SkillMenuControl : MonoBehaviour
 
             battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 1, skillID, targetType);
 
-            Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 1);
+            //Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 1);
 
             skillDatabase.GetComponent<SkillData>().UseSkillEffect(skillID);        //디버그용
         }

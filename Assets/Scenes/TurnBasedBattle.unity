@@ -3614,8 +3614,6 @@ GameObject:
   - component: {fileID: 622487742}
   - component: {fileID: 622487744}
   - component: {fileID: 622487743}
-  - component: {fileID: 622487745}
-  - component: {fileID: 622487748}
   - component: {fileID: 622487749}
   m_Layer: 5
   m_Name: Menu Frame
@@ -3684,56 +3682,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622487741}
   m_CullTransparentMesh: 1
---- !u!114 &622487745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622487741}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc5a4ca11d1968409d1dc6a07370b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BattleMaster: {fileID: 704444433}
-  isActBtnLocked: 0
-  isActLocked: 0
-  actionButtons:
-  - {fileID: 1834191128}
-  - {fileID: 883316374}
-  - {fileID: 1109884674}
-  - {fileID: 1181023266}
-  highlightedColors:
-  - {r: 1, g: 0.2, b: 0.2, a: 1}
-  - {r: 0.2, g: 1, b: 0.2, a: 1}
-  - {r: 1, g: 0.9607843, b: 0.2, a: 1}
-  - {r: 0.2, g: 0.5058824, b: 1, a: 1}
-  unselectedColors:
-  - {r: 0.5019608, g: 0.2509804, b: 0.2509804, a: 1}
-  - {r: 0.2509804, g: 0.5019608, b: 0.2509804, a: 1}
-  - {r: 0.5019608, g: 0.48235294, b: 0.2509804, a: 1}
-  - {r: 0.2509804, g: 0.34901962, b: 0.5019608, a: 1}
-  disabledColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
-  selectedBtnNum: 0
-  HorizontalInput: 0
-  VerticalInput: 0
---- !u!114 &622487748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622487741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 087a3b6b89a82984a9951ddbaca705cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemMenuFrame: {fileID: 720826547}
-  SkillMenuFrame: {fileID: 1933030002}
-  changeSizeTrigger: 0
-  isExpanded: 0
 --- !u!114 &622487749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3765,6 +3713,10 @@ MonoBehaviour:
   curMainBtnSelect: 0
   HorizontalInput: 0
   VerticalInput: 0
+  ItemMenuFrame: {fileID: 720826547}
+  SkillMenuFrame: {fileID: 1933030002}
+  changeSizeTrigger: 0
+  isExpanded: 0
 --- !u!1 &661671982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,7 +3936,6 @@ GameObject:
   m_Component:
   - component: {fileID: 704444434}
   - component: {fileID: 704444435}
-  - component: {fileID: 704444436}
   m_Layer: 0
   m_Name: Battle System Master
   m_TagString: Untagged
@@ -4032,19 +3983,6 @@ MonoBehaviour:
   IDofSelectingChar: 0
   assignedChar: 0000000000000000
   curSelectOrderNum: 0
---- !u!114 &704444436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704444433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a19dbca44707ec2448cc14d70e5d087b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MenuFrame: {fileID: 622487741}
 --- !u!1 &712028026
 GameObject:
   m_ObjectHideFlags: 0

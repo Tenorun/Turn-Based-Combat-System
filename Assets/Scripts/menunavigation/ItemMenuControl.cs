@@ -242,7 +242,7 @@ public class ItemMenuControl : MonoBehaviour
 
             battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 2, pointingItemID, targetType);
 
-            Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
+            //Menu.GetComponent<MenuWaker>().SetChangeMenu(false, 2);
             ItemDB.GetComponent<ItemData>().UseItemEffect(pointingItemID);   //디버그용
         }
     }
