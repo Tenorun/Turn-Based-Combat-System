@@ -78,17 +78,17 @@ public class SkillMenuControl : MonoBehaviour
         playerCharDatabase.GetComponent<PlayerCharacterData>().SetSearchCharacter(currentCharID);
 
         //캐릭터 스킬 슬롯 캐시 업데이트
-        skillSlotCache = playerCharDatabase.GetComponent<PlayerCharacterData>().character.SkillSlot;
+        skillSlotCache = playerCharDatabase.GetComponent<PlayerCharacterData>().resultCharacterData.SkillSlot;
 
         for(int i = 0; i < 4; i++)
         {
             //스킬 검색 설정
             skillDatabase.GetComponent<SkillData>().SetSearchSkill(skillSlotCache[i]);
 
-            skillNameCache[i] = skillDatabase.GetComponent<SkillData>().skill.SkillName[languageVal];                   //이름
-            skillDescriptionCache[i] = skillDatabase.GetComponent<SkillData>().skill.SkillDescription[languageVal];     //설명문
-            skillTypeCache[i] = skillDatabase.GetComponent<SkillData>().skill.SkillType;                                //타입
-            skillCostCache[i] = skillDatabase.GetComponent<SkillData>().skill.SkillCost;                                //SP 비용
+            skillNameCache[i] = skillDatabase.GetComponent<SkillData>().resultSkillData.SkillName[languageVal];                   //이름
+            skillDescriptionCache[i] = skillDatabase.GetComponent<SkillData>().resultSkillData.SkillDescription[languageVal];     //설명문
+            skillTypeCache[i] = skillDatabase.GetComponent<SkillData>().resultSkillData.SkillType;                                //타입
+            skillCostCache[i] = skillDatabase.GetComponent<SkillData>().resultSkillData.SkillCost;                                //SP 비용
         }
     }
 
@@ -186,7 +186,7 @@ public class SkillMenuControl : MonoBehaviour
         if(Input.GetButtonDown("Submit") && skillID != 0)
         {
             skillDatabase.GetComponent<SkillData>().SetSearchSkill(skillID);
-            int targetType = skillDatabase.GetComponent<SkillData>().skill.UseTarget;
+            int targetType = skillDatabase.GetComponent<SkillData>().resultSkillData.UseTarget;
 
             battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 1, skillID, targetType);
 

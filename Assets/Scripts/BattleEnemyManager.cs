@@ -13,7 +13,7 @@ public class BattleEnemyManager : MonoBehaviour
     int nextAssignNum = 1;
 
     //현재 전투의 적 할당 상태
-    public int[] assignedEnemies = new int[5] { 0, 0, 0, 0, 0 };
+    public int[] enemyPlaces = new int[5] { 0, 0, 0, 0, 0 };
 
     int enemyAmount = 0;                                    //적 개수
 
@@ -21,7 +21,7 @@ public class BattleEnemyManager : MonoBehaviour
     //적 데이터 베이스
     public GameObject enemyDB;
 
-    public AssignEnemy enemyStatus;
+    public AssignEnemy resultEnemyStatus;
 
     // 할당된 적 상태 클래스
     public class AssignedEnemyStatus
@@ -165,14 +165,14 @@ public class BattleEnemyManager : MonoBehaviour
         enemyAmount = 0;
         for(int i = 0; i < 5; i++)
         {
-            if (assignedEnemies[i] != 0) enemyAmount++;
+            if (enemyPlaces[i] != 0) enemyAmount++;
         }
 
         //누가 가운데 고정된 경우
         //TODO: 누가 가운데 고정된 경우의 고정된 적이 포메이션 정보 중앙에 오도록 하는 코드를 작성
 
         //가운데 고정이 되어 있으며, 그 고정된 적이 정위치에 있지 않을 때
-        if (keepEnemyMiddle && assignedEnemies[2] != enemyToKeepMiddle)
+        if (keepEnemyMiddle && enemyPlaces[2] != enemyToKeepMiddle)
         {
 
             //현재 가운데 고정 적 제외 적들
@@ -183,23 +183,23 @@ public class BattleEnemyManager : MonoBehaviour
 
             for(int i = 0; i < 5; i++)
             {
-                if (assignedEnemies[i] != 0 && assignedEnemies[i] != enemyToKeepMiddle)
+                if (enemyPlaces[i] != 0 && enemyPlaces[i] != enemyToKeepMiddle)
                 {
-                    nonMidEnemies[nonMidEnemyAmount++] = assignedEnemies[i];
+                    nonMidEnemies[nonMidEnemyAmount++] = enemyPlaces[i];
                 }
             }
 
             //할당 적 데이터 초기화
-            assignedEnemies = new int[5] { 0, 0, 0, 0, 0 };
+            enemyPlaces = new int[5] { 0, 0, 0, 0, 0 };
 
             //가운데 고정할 적 할당
-            assignedEnemies[2] = enemyToKeepMiddle;
+            enemyPlaces[2] = enemyToKeepMiddle;
 
             //nonMidEnemies들을 먼저 넣은 요소부터 1,3,0,4번 자리순서로 배정한다. 
-            if (nonMidEnemyAmount >= 1) assignedEnemies[1] = nonMidEnemies[0];
-            if (nonMidEnemyAmount >= 2) assignedEnemies[3] = nonMidEnemies[1];
-            if (nonMidEnemyAmount >= 3) assignedEnemies[0] = nonMidEnemies[2];
-            if (nonMidEnemyAmount >= 4) assignedEnemies[4] = nonMidEnemies[3];
+            if (nonMidEnemyAmount >= 1) enemyPlaces[1] = nonMidEnemies[0];
+            if (nonMidEnemyAmount >= 2) enemyPlaces[3] = nonMidEnemies[1];
+            if (nonMidEnemyAmount >= 3) enemyPlaces[0] = nonMidEnemies[2];
+            if (nonMidEnemyAmount >= 4) enemyPlaces[4] = nonMidEnemies[3];
 
         }
     }
@@ -218,22 +218,22 @@ public class BattleEnemyManager : MonoBehaviour
             if (keepEnemyMiddle)
             {
                 bool isGotPlaceLocation = false;
-                if (!isGotPlaceLocation && assignedEnemies[1] == 0)
+                if (!isGotPlaceLocation && enemyPlaces[1] == 0)
                 {
                     targetPlaceLocation = 1;
                     isGotPlaceLocation = true;
                 }
-                if (!isGotPlaceLocation && assignedEnemies[3] == 0)
+                if (!isGotPlaceLocation && enemyPlaces[3] == 0)
                 {
                     targetPlaceLocation = 3;
                     isGotPlaceLocation = true;
                 }
-                if (!isGotPlaceLocation && assignedEnemies[0] == 0)
+                if (!isGotPlaceLocation && enemyPlaces[0] == 0)
                 {
                     targetPlaceLocation = 0;
                     isGotPlaceLocation = true;
                 }
-                if (!isGotPlaceLocation && assignedEnemies[4] == 0)
+                if (!isGotPlaceLocation && enemyPlaces[4] == 0)
                 {
                     targetPlaceLocation = 4;
                     isGotPlaceLocation = true;
@@ -241,7 +241,7 @@ public class BattleEnemyManager : MonoBehaviour
             }
 
             //적 할당 배열에 적 할당 번호 정보 추가
-            assignedEnemies[targetPlaceLocation] = nextAssignNum;
+            enemyPlaces[targetPlaceLocation] = nextAssignNum;
 
             //추가 하려는 적의 정보 검색
             enemyDB.GetComponent<EnemyData>().SetSearchEnemy(enemyID);
@@ -249,8 +249,8 @@ public class BattleEnemyManager : MonoBehaviour
             //할당 적 상태 추가하기
             AssignedEnemyStatus.AddEnemyAssignment(
                 new AssignEnemy(nextAssignNum++, enemyID,
-                enemyDB.GetComponent<EnemyData>().enemy.MaxHP,
-                enemyDB.GetComponent<EnemyData>().enemy.BaseAP));
+                enemyDB.GetComponent<EnemyData>().resultEnemyData.MaxHP,
+                enemyDB.GetComponent<EnemyData>().resultEnemyData.BaseAP));
             
             //대열 형식 번호가 4보다 작고, 현재 대열 형식에서 가능한 적 개수를 초과 할 때 대열 형식 수정
             if(formationTypeNum < 4 && formationTypeNum <= enemyAmount - 1)
@@ -275,7 +275,7 @@ public class BattleEnemyManager : MonoBehaviour
 
         if(targetLocation != -1) //제거하려는 적이 있음
         {
-            assignedEnemies[targetLocation] = 0;
+            enemyPlaces[targetLocation] = 0;
 
             //만약 타겟이 가운데에 고정된 적 이라면
             if(targetAssignNum == enemyToKeepMiddle)
@@ -295,14 +295,14 @@ public class BattleEnemyManager : MonoBehaviour
         formationTypeNum = -1;
         enemyAmount = 0;
         nextAssignNum = 1;
-        assignedEnemies = new int[5] { 0, 0, 0, 0, 0 };
+        enemyPlaces = new int[5] { 0, 0, 0, 0, 0 };
         AssignedEnemyStatus.ResetEnemyAssignment();
     }
 
     //원격 적 검색
     public void SetSearchEnemyAssign(int targetAssignNum)
     {
-        enemyStatus = AssignedEnemyStatus.GetAssignedEnemy(targetAssignNum);
+        resultEnemyStatus = AssignedEnemyStatus.GetAssignedEnemy(targetAssignNum);
     }
 
     //
@@ -330,7 +330,7 @@ public class BattleEnemyManager : MonoBehaviour
 
         for (int i = 0; i < enemyDisplayObject.Length; i++)
         {
-            if (assignedEnemies[i] == 0)
+            if (enemyPlaces[i] == 0)
             {
                 //Hide Enemy
                 enemyDisplayObject[i].SetActive(false);
@@ -344,8 +344,8 @@ public class BattleEnemyManager : MonoBehaviour
                 SpriteRenderer enemyDisplaySpriteRenderer = enemyDisplayObject[i].GetComponent<SpriteRenderer>();
 
                 //i번째 적의 스프라이트 ID
-                SetSearchEnemyAssign(assignedEnemies[i]);
-                int targetSpriteID = enemyStatus.EnemySpriteImageID;
+                SetSearchEnemyAssign(enemyPlaces[i]);
+                int targetSpriteID = resultEnemyStatus.EnemySpriteImageID;
 
                 //i번째 적의 스프라이트 이미지
                 Sprite targetSpriteData = enemyDB.GetComponent<EnemyData>().imageArray[targetSpriteID];
@@ -405,7 +405,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (keepFirstEnemyMiddle)
         {
             keepEnemyMiddle = true;
-            enemyToKeepMiddle = assignedEnemies[0];
+            enemyToKeepMiddle = enemyPlaces[0];
             formationTypeNum = 4;
         }
 
@@ -416,7 +416,7 @@ public class BattleEnemyManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (assignedEnemies[i] == enemyNum)
+            if (enemyPlaces[i] == enemyNum)
             {
                 return i;
             }
@@ -443,7 +443,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (TEST_TRIGGER_wakeup)
         {
             TEST_TRIGGER_wakeup = false;
-            WakeEnemyManager(new int[] {1}, false);
+            WakeEnemyManager(new int[] {1, 2, 2, 2, 1}, false);
         }
         if (TEST_TRIGGER_add1)
         {
@@ -458,7 +458,7 @@ public class BattleEnemyManager : MonoBehaviour
         if (TEST_TRIGGER_remove)
         {
             TEST_TRIGGER_remove = false;
-            RemoveEnemyAssign(assignedEnemies[TEST_removeTargetPosition]);
+            RemoveEnemyAssign(enemyPlaces[TEST_removeTargetPosition]);
         }
     }
 }

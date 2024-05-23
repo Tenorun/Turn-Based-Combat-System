@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyData : MonoBehaviour
 {
-    public Enemy enemy;
+    public Enemy resultEnemyData;
     // 적 데이터베이스 클래스
     public class EnemyDatabase
     {
@@ -204,7 +204,7 @@ public class EnemyData : MonoBehaviour
         // **예시2** //
         EnemyDatabase.AddEnemy(new Enemy(
             2,      //적 ID
-            new string[] { "더미", "Dummie" },     //적 이름
+            new string[] { "구름 아조씨", "Mr.Thunder Cloud" },     //적 이름
             1,      //적 유형
             1,      //적 AI
             100,    //최대 HP
@@ -282,6 +282,6 @@ public class EnemyData : MonoBehaviour
     //원격 적 검색
     public void SetSearchEnemy(int enemyID)
     {
-        enemy = EnemyDatabase.GetEnemy(enemyID);
+        resultEnemyData = EnemyDatabase.GetEnemy(enemyID);
     }
 }

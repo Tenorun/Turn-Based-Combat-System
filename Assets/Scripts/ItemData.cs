@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemData : MonoBehaviour
 {
-    public Item item;
+    public Item resultItemData;
     // 아이템 데이터베이스 클래스
     public class ItemDatabase
     {
@@ -97,24 +97,24 @@ public class ItemData : MonoBehaviour
     //아이템 효과
     public void UseItemEffect(int itemId)
     {
-        item = ItemDatabase.GetItem(itemId);
+        resultItemData = ItemDatabase.GetItem(itemId);
 
         switch (itemId)
         {
             case 1:
-                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                Debug.Log($"{resultItemData.ItemName[0]}을(를) 사용함");
                 break; 
             case 2:
-                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                Debug.Log($"{resultItemData.ItemName[0]}을(를) 사용함");
                 break;
             case 3:
-                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                Debug.Log($"{resultItemData.ItemName[0]}을(를) 사용함");
                 break;
             case 4:
-                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                Debug.Log($"{resultItemData.ItemName[0]}을(를) 사용함");
                 break;
             case 5:
-                Debug.Log($"{item.ItemName[0]}을(를) 사용함");
+                Debug.Log($"{resultItemData.ItemName[0]}을(를) 사용함");
                 break;
             default:
                 Debug.LogError($"아이템 고유번호 {itemId}에 해당하는 아이템은 존재하지 않습니다.");
@@ -125,7 +125,7 @@ public class ItemData : MonoBehaviour
     //원격 아이템 검색
     public void SetSearchItem(int itemID)
     {
-        item = ItemDatabase.GetItem(itemID);
+        resultItemData = ItemDatabase.GetItem(itemID);
     }
 
     // Update is called once per frame

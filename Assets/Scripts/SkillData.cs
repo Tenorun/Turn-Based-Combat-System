@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkillData : MonoBehaviour
 {
-    public Skill skill;
+    public Skill resultSkillData;
     // 아이템 데이터베이스 클래스
     public class SkillDatabase
     {
@@ -137,54 +137,54 @@ public class SkillData : MonoBehaviour
     //스킬 효과
     public void UseSkillEffect(int skillId)
     {
-        skill = SkillDatabase.GetSkill(skillId);
+        resultSkillData = SkillDatabase.GetSkill(skillId);
 
         switch (skillId)
         {
             case 1:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 2:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 3:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 4:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 5:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 6:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 7:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 8:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 9:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 10:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 11:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 12:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 13:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 14:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             case 15:
-                Debug.Log($"{skill.SkillName[0]}을(를) 사용함");
+                Debug.Log($"{resultSkillData.SkillName[0]}을(를) 사용함");
                 break;
             default:
                 Debug.LogError($"스킬 ID: {skillId}에 해당하는 스킬은 존재하지 않습니다.");
@@ -195,6 +195,6 @@ public class SkillData : MonoBehaviour
     //원격 스킬 검색
     public void SetSearchSkill(int skillID)
     {
-        skill = SkillDatabase.GetSkill(skillID);
+        resultSkillData = SkillDatabase.GetSkill(skillID);
     }
 }

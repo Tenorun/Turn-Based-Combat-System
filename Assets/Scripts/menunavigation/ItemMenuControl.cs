@@ -25,13 +25,13 @@ public class ItemMenuControl : MonoBehaviour
 
 
     //세로 입력 항목들
-    private float vertInputDelayTime = 0f;              //세로 입력 딜레이 시간 값
+    private float vertInputWaitTime = 0f;              //세로 입력 딜레이 시간 값
     private float verticalInput = 0f;                   //세로 입력값
     private float prevVerticalInput;                    //이전 세로 입력값
     private bool vertReleased = true;                   //세로 한번 풀림
 
     //가로 입력 항목들
-    private float horInputDelayTime = 0f;               //가로 입력 딜레이 시간 값
+    private float horInputWaitTime = 0f;               //가로 입력 딜레이 시간 값
     private float horizontalInput = 0f;                 //가로 입력값
     private float prevHorizontalInput;                  //이전 가로 입력값
     private bool horReleased = true;                    //가로 한번 풀림
@@ -75,7 +75,7 @@ public class ItemMenuControl : MonoBehaviour
     //아이템 화살표 번호 업데이트
     void UpdateItemArrowNum()
     {
-        vertInputDelayTime += Time.deltaTime;
+        vertInputWaitTime += Time.deltaTime;
 
         if (pointingItemID == 0)
         {
@@ -91,20 +91,20 @@ public class ItemMenuControl : MonoBehaviour
         }
 
         //한번 푼 뒤에 다시 입력하거나 딜레이 시간 벗어났을때 입력 가능
-        if (vertReleased || vertInputDelayTime >= 0.2f)
+        if (vertReleased || vertInputWaitTime >= 0.2f)
         {
             //화살표 움직임 위
             if (verticalInput >= 0.3f && itemArrowNum > 0)
             {
                 --itemArrowNum;
-                vertInputDelayTime = 0f;
+                vertInputWaitTime = 0f;
                 vertReleased = false;
             }
             //화살표 움직임 아래
             else if (verticalInput <= -0.3f && itemArrowNum < 4 && previewInventory[itemArrowNum + 1] != 0)
             {
                 ++itemArrowNum;
-                vertInputDelayTime = 0f;
+                vertInputWaitTime = 0f;
                 vertReleased = false;
             }
         }
@@ -113,17 +113,17 @@ public class ItemMenuControl : MonoBehaviour
     //아이템 페이지 번호 업데이트
     void UpdatePageNum()
     {
-        horInputDelayTime += Time.deltaTime;
+        horInputWaitTime += Time.deltaTime;
         pageLength = inventoryCache.Count / 5 + 1;
 
         //한번 푼 뒤에 다시 입력하거나 딜레이 시간 벗어났을때 입력 가능
-        if (horReleased || horInputDelayTime >= 0.2f)
+        if (horReleased || horInputWaitTime >= 0.2f)
         {
             //메뉴 페이지 진행 (->)
             if(horizontalInput >= 0.3f && currentPageNum < pageLength)
             {
                 ++currentPageNum;
-                horInputDelayTime = 0f;
+                horInputWaitTime = 0f;
                 horReleased = false;
                 GetPreviewInventory();
             }
@@ -131,7 +131,7 @@ public class ItemMenuControl : MonoBehaviour
             else if(horizontalInput <= -0.3f && currentPageNum > 1)
             {
                 --currentPageNum;
-                horInputDelayTime = 0f;
+                horInputWaitTime = 0f;
                 horReleased = false;
                 GetPreviewInventory();
             }
@@ -176,7 +176,7 @@ public class ItemMenuControl : MonoBehaviour
     void GetInventoryCache(int selectingCharNum)
     {
         PlayerCharDB.GetComponent<PlayerCharacterData>().SetSearchCharacter(selectingCharNum);
-        inventoryCache = PlayerCharDB.GetComponent<PlayerCharacterData>().character.Inventory;
+        inventoryCache = PlayerCharDB.GetComponent<PlayerCharacterData>().resultCharacterData.Inventory;
         if(prevCharID != currentCharID)
         {
             itemArrowNum = 0;
@@ -212,7 +212,7 @@ public class ItemMenuControl : MonoBehaviour
             if (previewInventory[i] != 0)
             {
                 ItemDB.GetComponent<ItemData>().SetSearchItem(previewInventory[i]);
-                itemNames[i] = ItemDB.GetComponent<ItemData>().item.ItemName[languageVal];
+                itemNames[i] = ItemDB.GetComponent<ItemData>().resultItemData.ItemName[languageVal];
             }
             else
             {
@@ -224,7 +224,7 @@ public class ItemMenuControl : MonoBehaviour
         if(pointingItemID != 0)
         {
             ItemDB.GetComponent<ItemData>().SetSearchItem(pointingItemID);
-            itemDescription = ItemDB.GetComponent<ItemData>().item.ItemDescription[languageVal];
+            itemDescription = ItemDB.GetComponent<ItemData>().resultItemData.ItemDescription[languageVal];
         }
         else
         {
@@ -238,7 +238,7 @@ public class ItemMenuControl : MonoBehaviour
         if(Input.GetButtonDown("Submit") && pointingItemID != 0)
         {
             ItemDB.GetComponent<ItemData>().SetSearchItem(pointingItemID);
-            int targetType = ItemDB.GetComponent<ItemData>().item.UseTarget;
+            int targetType = ItemDB.GetComponent<ItemData>().resultItemData.UseTarget;
 
             battleMaster.GetComponent<BattleMaster>().SubmitAction(currentCharID, 2, pointingItemID, targetType);
 
@@ -265,9 +265,11 @@ public class ItemMenuControl : MonoBehaviour
         currentCharID = battleMaster.GetComponent<BattleMaster>().IDofSelectingChar;
         GetInventoryCache(battleMaster.GetComponent<BattleMaster>().IDofSelectingChar);
 
+
         GetDirectionalInput();
         UpdateItemArrowNum();
         UpdatePageNum();
+        GetPreviewInventory();
         pointingItemID = previewInventory[itemArrowNum];
         GetNameAndDescription();
         UpdateDisplay();

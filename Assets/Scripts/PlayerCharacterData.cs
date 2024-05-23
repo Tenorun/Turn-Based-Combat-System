@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCharacterData : MonoBehaviour
 {
-    public PlayerCharacter character;
+    public PlayerCharacter resultCharacterData;
 
     // 플레이어 캐릭터 데이터베이스 클래스
     public class PlayerCharacterDatabase
@@ -131,7 +131,7 @@ public class PlayerCharacterData : MonoBehaviour
 
     public void SetSearchCharacter(int characterID)
     {
-        character = PlayerCharacterDatabase.GetPlayer(characterID);
+        resultCharacterData = PlayerCharacterDatabase.GetPlayer(characterID);
     }
 
     void Start()
@@ -163,22 +163,22 @@ public class PlayerCharacterData : MonoBehaviour
         
 
         //테스트 인벤토리
-        character = PlayerCharacterDatabase.GetPlayer(1);
+        resultCharacterData = PlayerCharacterDatabase.GetPlayer(1);
 
-        character.Inventory.Add(1);
-        character.Inventory.Add(2);
-        character.Inventory.Add(3);
-        character.Inventory.Add(4);
-        character.Inventory.Add(5);
-        character.Inventory.Add(4);
-        character.Inventory.Add(2);
-        character.Inventory.Add(2);
-        character.Inventory.Add(1);
-        character.Inventory.Add(5);
-        character.Inventory.Add(2);
-        character.Inventory.Add(2);
+        resultCharacterData.Inventory.Add(1);
+        resultCharacterData.Inventory.Add(2);
+        resultCharacterData.Inventory.Add(3);
+        resultCharacterData.Inventory.Add(4);
+        resultCharacterData.Inventory.Add(5);
+        resultCharacterData.Inventory.Add(4);
+        resultCharacterData.Inventory.Add(2);
+        resultCharacterData.Inventory.Add(2);
+        resultCharacterData.Inventory.Add(1);
+        resultCharacterData.Inventory.Add(5);
+        resultCharacterData.Inventory.Add(2);
+        resultCharacterData.Inventory.Add(2);
 
-        character.SkillSlot = new int[4] { 14, 3, 15, 0 };
+        resultCharacterData.SkillSlot = new int[4] { 14, 3, 15, 0 };
 
 
 
@@ -203,9 +203,9 @@ public class PlayerCharacterData : MonoBehaviour
             0,       //경혐치
             new int[] { 7, 7, 3, 5, 6, 6, 4, 4 }    //성장 적성
             ));
-        character = PlayerCharacterDatabase.GetPlayer(2);
-        character.Inventory.Add(3);
-        character.Inventory.Add(3);
-        character.Inventory.Add(3);
+        resultCharacterData = PlayerCharacterDatabase.GetPlayer(2);
+        resultCharacterData.Inventory.Add(3);
+        resultCharacterData.Inventory.Add(3);
+        resultCharacterData.Inventory.Add(3);
     }
 }

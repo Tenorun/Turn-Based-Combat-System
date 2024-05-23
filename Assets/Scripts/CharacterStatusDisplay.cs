@@ -43,10 +43,10 @@ public class CharacterStatusDisplay : MonoBehaviour
         //캐시 업데이트
         PlayerCharData.GetComponent<PlayerCharacterData>().SetSearchCharacter(ID);
 
-        currentHPCache = PlayerCharData.GetComponent<PlayerCharacterData>().character.CurrentHp;
-        currentSPCache = PlayerCharData.GetComponent<PlayerCharacterData>().character.CurrentSp;
-        maxHPCache = PlayerCharData.GetComponent<PlayerCharacterData>().character.MaxHp;
-        maxSPCache = PlayerCharData.GetComponent<PlayerCharacterData>().character.MaxSp;
+        currentHPCache = PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.CurrentHp;
+        currentSPCache = PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.CurrentSp;
+        maxHPCache = PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.MaxHp;
+        maxSPCache = PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.MaxSp;
 
 
 
@@ -181,14 +181,14 @@ public class CharacterStatusDisplay : MonoBehaviour
         {
             HPDownTrigger = false;
             PlayerCharData.GetComponent<PlayerCharacterData>().SetSearchCharacter(characterID);
-            PlayerCharData.GetComponent<PlayerCharacterData>().character.CurrentHp -= 10;
+            PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.CurrentHp -= 10;
             UpdateDisplay(characterID);
         }
         else if (SPDownTrigger)
         {
             SPDownTrigger = false;
             PlayerCharData.GetComponent<PlayerCharacterData>().SetSearchCharacter(characterID);
-            PlayerCharData.GetComponent<PlayerCharacterData>().character.CurrentSp -= 10;
+            PlayerCharData.GetComponent<PlayerCharacterData>().resultCharacterData.CurrentSp -= 10;
             UpdateDisplay(characterID);
         }
 
